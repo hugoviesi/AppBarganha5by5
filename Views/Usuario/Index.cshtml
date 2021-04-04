@@ -1,0 +1,120 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    //@readonly = Model.TipoUsuario == "Pessoa Física" ? "readonly" : ""
+*@
+@model AppBarganhaWEB.Models.UsuarioVO
+
+<script src="~/js/site.js"></script>
+
+@using (Html.BeginForm("Cadastrar", "Usuario", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <main class="d-flex justify-content-center">
+            <div class="">
+                <div class="form-group" id="tipoPessoa">
+                    @Html.LabelFor(model => model.Login, "Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @foreach (var tipo in ViewBag.TipoUsuario as List<string>)
+                        {
+                            @Html.RadioButtonFor(model => model.TipoUsuario, tipo) @tipo<br />
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group" id="documento">
+                    @Html.LabelFor(model => model.Login, "Documento", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Documento, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Login, "Login", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Senha, "Senha", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.Senha, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group" id="nomeFisico">
+                    @Html.LabelFor(model => model.Nome, "Nome", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group" id="razaoSocial">
+                    @Html.LabelFor(model => model.RazaoSocial, "Razão Social", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.RazaoSocial, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group" id="nomeFantasia">
+                    @Html.LabelFor(model => model.NomeFantasia, "Nome Fantasia", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NomeFantasia, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.InteressesSelecionados, "Interesses", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.ListBoxFor(model => model.InteressesSelecionados, ViewBag.Interesses as MultiSelectList)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Endereco.Cep, "Cep", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" id="cep">
+                        @Html.EditorFor(model => model.Endereco.Cep, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group" id="logradouro">
+                    @Html.LabelFor(model => model.Endereco.Logradouro, "Logradouro", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Endereco.Logradouro, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group" id="bairro">
+                    @Html.LabelFor(model => model.Endereco.Bairro, "Bairro", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Endereco.Bairro, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group" id="localidade">
+                    @Html.LabelFor(model => model.Endereco.Localidade, "Localidade", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Endereco.Localidade, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group" id="uf">
+                    @Html.LabelFor(model => model.Endereco.Uf, "Unidade Federal", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Endereco.Uf, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="d-flex py-2">
+                    <div class="col-md-10">
+                        <input type="submit" id="cadastrarUsuario" value="Cadastrar" class="btn btn-success form-control px-5" />
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+}
