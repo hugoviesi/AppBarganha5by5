@@ -1,32 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-@model AppBarganhaWEB.Models.HomeVO
+﻿@model AppBarganhaWEB.Models.HomeVO
 
 <h1>Bem-Vindo, @Model.UsuarioLogado.Nome</h1>
 
-<div class="col-md-10">
-    @Html.ActionLink("Anunciar", "Index", "Anuncio")
-</div>
-
-<div class="col-md-10">
-    @Html.ActionLink("Sair", "LogOut", "Login")
-</div>
-
-<div class="col-md-10">
-    @Html.ActionLink("Leilão", "Index", "Leilao")
+<div class="btn-group" role="group" aria-label="Exemplo básico">
+    <div class="col-md-10">
+        @Html.ActionLink("Anunciar", "Index", "Anuncio")
+    </div>
+    <div class="col-md-10">
+        @Html.ActionLink("Sair", "LogOut", "Login")
+    </div>
+    <div class="col-md-10">
+        @Html.ActionLink("Leilão", "Index", "Leilao")
+    </div>
 </div>
 
 <h2>Seus Anuncios</h2>
 
-@foreach(var anuncio in Model.Anuncios)
-{
-<div>
-    <p> Nome: @anuncio.Nome </p>
-    <p> Descricao: @anuncio.Descricao </p>
-    <p> Valor: @anuncio.Valor </p>
-</div>         
-}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Valor</th>
+        </tr>
+    </thead>
+    @{
+        int count = 1;
+
+        @foreach (var anuncio in Model.Anuncios)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@anuncio.Nome</td>
+                    <td>@anuncio.Descricao</td>
+                    <td>@anuncio.Valor</td>
+                </tr>
+            </tbody>
+            count++;
+        }
+    }
+
+</table>
