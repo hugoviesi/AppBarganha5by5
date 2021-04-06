@@ -8,7 +8,7 @@ namespace AppBarganhaWEB.Controllers
     {
         public IActionResult Index()
         {
-            var documento = HttpContext.Request.Query["documento"];
+            var documento = HttpContext.Request.Query["documento"]; 
             if (!Documento.EhValido(documento))
             {
                 return BadRequest();

@@ -4,7 +4,7 @@ namespace AppBarganhaWEB.Models
 {
     public class UsuarioVO
     {
-        public string TipoUsuario { get; set; } = "Pessoa Jurídica";
+        public string TipoUsuario { get; set; } //= "Pessoa Jurídica";
         public string Login { get; set; }
         public string Senha { get; set; }
         public Endereco Endereco { get; set; }

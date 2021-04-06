@@ -23,6 +23,7 @@
             <th scope="col">Nome</th>
             <th scope="col">Descrição</th>
             <th scope="col">Valor</th>
+            <th scope="col">Ofertas</th>
         </tr>
     </thead>
     @{
@@ -36,6 +37,13 @@
                     <td>@anuncio.Nome</td>
                     <td>@anuncio.Descricao</td>
                     <td>@anuncio.Valor</td>
+                    <td>
+                        <div class="d-flex py-2">
+                            <div class="col-md-10">
+                                @*@Html.ActionLink("Ofertas", "Index", "Oferta") TO DO: listagem de ofertas do anuncio do usuario*@
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
             count++;

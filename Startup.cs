@@ -30,6 +30,7 @@ namespace AppBarganhaWEB
             services.AddSingleton<IBarganhaDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<BarganhaDatabaseSettings>>().Value);
 
+            services.AddSingleton<OfertaService>();
             services.AddSingleton<UsuarioService>();
             services.AddSingleton<PessoaFisicaService>();
             services.AddSingleton<PessoaJuridicaService>();

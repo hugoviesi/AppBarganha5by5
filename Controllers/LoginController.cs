@@ -10,7 +10,6 @@ namespace AppBarganhaWEB.Controllers
     {
         private readonly UsuarioService _usuarioService;
 
-
         public LoginController(UsuarioService usuarioService)
         {
             _usuarioService = usuarioService;

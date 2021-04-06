@@ -45,5 +45,7 @@ namespace AppBarganha.Services
         {
             return _anuncios.Find<Anuncio>(anuncio => anuncio.Categorias == categorias && anuncio.IdUsuario != idUsuarioLogado).ToList();
         }
+
+
     }
 }

@@ -10,11 +10,11 @@
                 return false;
             }
 
-            if (documento.Length == 11)
+            if (documento.Length == 11) //cpf
             {
                 return ValidaCPF(documento);
             }
-            else if (documento.Length == 14)
+            else if (documento.Length == 14) //cnpj
             {
                 return ValidaCNPJ(documento);
             }

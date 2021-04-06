@@ -11,13 +11,13 @@ namespace AppBarganhaWEB.Utils
             return Recuperar(httpContext).Id != null;
         }
 
-        public static Models.UsuarioLogado Recuperar(HttpContext httpContext)
+        public static UsuarioLogado Recuperar(HttpContext httpContext)
         {
-            return new Models.UsuarioLogado
+            return new UsuarioLogado
             {
                 Id = httpContext.Session.GetString("id"),
                 Nome = httpContext.Session.GetString("nome"),
-                Tipo = (httpContext.Session.GetString("tipo") == "FISICA") ? TipoUsuario.FISICA : TipoUsuario.JURIDICA
+                Tipo = (httpContext.Session.GetString("tipo") == "FISICA") ? TipoUsuario.FISICA : TipoUsuario.JURIDICA //if ternário
             };
         }
 
