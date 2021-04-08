@@ -72,7 +72,6 @@ $.when($.ready).then(function () {
         })
     }
 
-
     preencheEndereco()
     trataTipoDeFormularioPorPessoa()
     mostraFormularioUsuarioPadrao()

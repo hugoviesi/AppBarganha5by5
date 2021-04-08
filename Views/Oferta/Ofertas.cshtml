@@ -1,0 +1,49 @@
+﻿@model AppBarganhaWEB.ViewsObject.OfertasPorAnuncioVO
+
+<h1>Detalhes do Anuncio</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Valor</th>
+        </tr>
+    </thead>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">@Model.Anuncio.Nome</th>
+            <th scope="col">@Model.Anuncio.Valor</th>
+        </tr>
+    </thead>
+    }
+</table>
+
+<h1>Ofertas</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ofertante</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Valor</th>
+        </tr>
+    </thead>
+    @{
+        int count = 1;
+        @foreach (var oferta in Model.Ofertas)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@oferta.Descricao</td>
+                    <td>@oferta.Valor</td>
+                </tr>
+            </tbody>
+            count++;
+        }
+    }
+</table>
+

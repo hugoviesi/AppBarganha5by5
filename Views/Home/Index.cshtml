@@ -1,4 +1,4 @@
-﻿@model AppBarganhaWEB.Models.HomeVO
+﻿@model AppBarganhaWEB.ViewsObject.HomeVO
 
 <h1>Bem-Vindo, @Model.UsuarioLogado.Nome</h1>
 
@@ -6,11 +6,17 @@
     <div class="col-md-10">
         @Html.ActionLink("Anunciar", "Index", "Anuncio")
     </div>
+
     <div class="col-md-10">
         @Html.ActionLink("Sair", "LogOut", "Login")
     </div>
+
     <div class="col-md-10">
         @Html.ActionLink("Leilão", "Index", "Leilao")
+    </div>
+
+    <div class="col-md-10">
+        @Html.ActionLink("Perfil", "Index", "Perfil")
     </div>
 </div>
 
@@ -40,7 +46,7 @@
                     <td>
                         <div class="d-flex py-2">
                             <div class="col-md-10">
-                                @*@Html.ActionLink("Ofertas", "Index", "Oferta") TO DO: listagem de ofertas do anuncio do usuario*@
+                                @Html.ActionLink("Ofertas", "OfertasPorAnuncio", "Oferta")
                             </div>
                         </div>
                     </td>

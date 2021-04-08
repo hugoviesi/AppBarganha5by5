@@ -1,5 +1,6 @@
 ﻿using AppBarganha.Services;
-using AppBarganhaWEB.Models;
+using AppBarganhaWEB.Utils;
+using AppBarganhaWEB.ViewsObject;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppBarganhaWEB.Controllers
@@ -16,7 +17,7 @@ namespace AppBarganhaWEB.Controllers
 
         public IActionResult Index()
         {
-            var usuarioLogado = Utils.UsuarioLogadoSessao.Recuperar(HttpContext);
+            var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
 
             var homeVO = new HomeVO
             {

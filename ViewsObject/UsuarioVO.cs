@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using AppBarganhaWEB.Models;
+using System.Collections.Generic;
 
-namespace AppBarganhaWEB.Models
+namespace AppBarganhaWEB.ViewsObject
 {
     public class UsuarioVO
     {

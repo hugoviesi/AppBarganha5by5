@@ -1,7 +1,7 @@
 ﻿using AppBarganha.Services;
-using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Services;
 using AppBarganhaWEB.Utils;
+using AppBarganhaWEB.ViewsObject;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppBarganhaWEB.Controllers

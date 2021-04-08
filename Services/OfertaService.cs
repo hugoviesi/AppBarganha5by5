@@ -22,8 +22,11 @@ namespace AppBarganhaWEB.Services
         public List<Oferta> Get() =>
         _oferta.Find(oferta => true).ToList();
 
-        public Oferta Get(string id) =>
-            _oferta.Find<Oferta>(oferta => oferta.IdUsuarioOfertante == id).FirstOrDefault();
+        public List<Oferta> GetPorUsuarioOfertante(string id) =>
+            _oferta.Find<Oferta>(oferta => oferta.IdUsuarioOfertante == id).ToList();
+
+        public List<Oferta> GetPorAnuncio(string idAnuncio) =>
+            _oferta.Find<Oferta>(oferta => oferta.IdAnuncio == idAnuncio).ToList();
 
         public Oferta Create(Oferta oferta)
         {

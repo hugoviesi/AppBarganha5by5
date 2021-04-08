@@ -51,3 +51,5 @@ C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\AppBarganh
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\AppBarganhaWEB.genruntimeconfig.cache
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Oferta\Index.cshtml.g.cs
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\AppBarganhaWEB.csprojAssemblyReference.cache
+C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Oferta\Ofertas.cshtml.g.cs
+C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Perfil\Index.cshtml.g.cs

@@ -1,6 +1,7 @@
 ﻿using AppBarganha.Services;
 using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Utils;
+using AppBarganhaWEB.ViewsObject;
 using System;
 
 namespace AppBarganhaWEB.Services

@@ -52,5 +52,18 @@ namespace AppBarganhaWEB.Controllers
 
             return (RedirectToAction("Index", "Leilao"));
         }
+
+        public IActionResult OfertasPorAnuncio()
+        {
+            var anuncioId = HttpContext.Request.Query["idAnuncio"];
+
+            var ofertasAnuncio = new OfertasPorAnuncioVO
+            {
+                Ofertas = _ofertaService.GetPorAnuncio(anuncioId),
+                Anuncio = _anuncioService.Get(anuncioId)
+            };
+
+            return View(ofertasAnuncio);
+        }
     }
 }

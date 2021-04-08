@@ -19,9 +19,8 @@ namespace AppBarganhaWEB.Models
 
         public Endereco Endereco { get; set; }
         public string Foto { get; set; } //TODO: REMOVER
-        public int Pontuacao { get; set; } //TODO: REMOVER
+        public int Pontuacao { get; set; }
         public bool Vip { get; set; } //TODO: REMOVER
-
         public List<Categoria> Interesses { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Services;
 using AppBarganhaWEB.Utils;
+using AppBarganhaWEB.ViewsObject;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
