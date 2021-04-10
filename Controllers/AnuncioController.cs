@@ -2,6 +2,7 @@
 using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Utils;
 using AppBarganhaWEB.ViewsObject;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -23,9 +24,11 @@ namespace AppBarganhaWEB.Controllers
             return View();
         }
 
-        public IActionResult Cadastrar(AnuncioVO anuncioVO)
+        public IActionResult Cadastrar(AnuncioVO anuncioVO, IFormFile pic)
         {
             var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
+
+            var path = Upload.UploadFoto(pic);
 
             var anuncio = new Anuncio
             {
@@ -34,9 +37,11 @@ namespace AppBarganhaWEB.Controllers
                 Categorias = anuncioVO.GetCategorias(),
                 Valor = anuncioVO.Valor,
                 DataPublicacao = DateTime.Now,
-                IdUsuario = usuarioLogado.Id
+                IdUsuario = usuarioLogado.Id,
+                FileName = path,
+                Status = StatusAnuncio.ABERTO
             };
-
+            
             _anuncioService.Create(anuncio);
 
             return RedirectToAction("Index", "Home");

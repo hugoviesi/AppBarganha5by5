@@ -8,15 +8,15 @@
     </div>
 
     <div class="col-md-10">
-        @Html.ActionLink("Sair", "LogOut", "Login")
-    </div>
-
-    <div class="col-md-10">
         @Html.ActionLink("Leilão", "Index", "Leilao")
     </div>
 
     <div class="col-md-10">
-        @Html.ActionLink("Perfil", "Index", "Perfil")
+        @Html.ActionLink("Perfil", "Perfil", "Usuario")
+    </div>
+
+    <div class="col-md-10">
+        @Html.ActionLink("Sair", "LogOut", "Login")
     </div>
 </div>
 
@@ -46,7 +46,7 @@
                     <td>
                         <div class="d-flex py-2">
                             <div class="col-md-10">
-                                @Html.ActionLink("Ofertas", "OfertasPorAnuncio", "Oferta")
+                                @Html.ActionLink("Ofertas", "OfertasPorAnuncio", "Oferta", new { idAnuncio = anuncio.Id }, null)
                             </div>
                         </div>
                     </td>

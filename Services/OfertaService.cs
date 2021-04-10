@@ -19,8 +19,8 @@ namespace AppBarganhaWEB.Services
             _oferta = database.GetCollection<Oferta>("Oferta");
         }
 
-        public List<Oferta> Get() =>
-        _oferta.Find(oferta => true).ToList();
+        public Oferta Get(string id) =>
+            _oferta.Find(oferta => oferta.Id == id).FirstOrDefault();
 
         public List<Oferta> GetPorUsuarioOfertante(string id) =>
             _oferta.Find<Oferta>(oferta => oferta.IdUsuarioOfertante == id).ToList();
@@ -35,12 +35,12 @@ namespace AppBarganhaWEB.Services
         }
 
         public void Update(string id, Oferta ofertaIn) =>
-            _oferta.ReplaceOne(oferta => oferta.IdUsuarioOfertante == id, ofertaIn);
+            _oferta.ReplaceOne(oferta => oferta.Id == id, ofertaIn);
 
         public void Remove(Oferta ofertaIn) =>
-            _oferta.DeleteOne(oferta => oferta.IdUsuarioOfertante == ofertaIn.IdUsuarioOfertante);
+            _oferta.DeleteOne(oferta => oferta.Id == ofertaIn.IdUsuarioOfertante);
 
         public void Remove(string id) =>
-            _oferta.DeleteOne(oferta => oferta.IdUsuarioOfertante == id);
+            _oferta.DeleteOne(oferta => oferta.Id == id);
     }
 }

@@ -7,6 +7,11 @@ namespace AppBarganhaWEB.Utils
     {
         public static string GeraHash(string senha)
         {
+            if (senha == null || senha == "")
+            {
+                return null;
+            }
+
             using (SHA256 mySHA256 = SHA256.Create())
             {
                 var senhaHash = mySHA256.ComputeHash(Encoding.ASCII.GetBytes(senha));

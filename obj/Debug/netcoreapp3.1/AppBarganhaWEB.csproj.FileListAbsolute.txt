@@ -13,6 +13,7 @@ C:\Users\viesi\source\reposWEB\AppBarganhaWEB\bin\Debug\netcoreapp3.1\MongoDB.Bs
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\bin\Debug\netcoreapp3.1\MongoDB.Driver.dll
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\bin\Debug\netcoreapp3.1\MongoDB.Driver.Core.dll
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\bin\Debug\netcoreapp3.1\MongoDB.Libmongocrypt.dll
+C:\Users\viesi\source\reposWEB\AppBarganhaWEB\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\bin\Debug\netcoreapp3.1\SharpCompress.dll
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\bin\Debug\netcoreapp3.1\runtimes\win\native\libzstd.dll
@@ -21,6 +22,7 @@ C:\Users\viesi\source\reposWEB\AppBarganhaWEB\bin\Debug\netcoreapp3.1\runtimes\w
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\bin\Debug\netcoreapp3.1\runtimes\linux\native\libmongocrypt.so
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\bin\Debug\netcoreapp3.1\runtimes\osx\native\libmongocrypt.dylib
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\bin\Debug\netcoreapp3.1\runtimes\win\native\mongocrypt.dll
+C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\AppBarganhaWEB.csprojAssemblyReference.cache
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\AppBarganhaWEB.AssemblyInfoInputs.cache
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\AppBarganhaWEB.AssemblyInfo.cs
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\AppBarganhaWEB.csproj.CoreCompileInputs.cache
@@ -37,6 +39,8 @@ C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\View
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Leilao\Index.cshtml.g.cs
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
+C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Oferta\Index.cshtml.g.cs
+C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Oferta\OfertasPorAnuncio.cshtml.g.cs
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Index.cshtml.g.cs
@@ -49,7 +53,4 @@ C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\AppBarganh
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\AppBarganhaWEB.dll
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\AppBarganhaWEB.pdb
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\AppBarganhaWEB.genruntimeconfig.cache
-C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Oferta\Index.cshtml.g.cs
-C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\AppBarganhaWEB.csprojAssemblyReference.cache
-C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Oferta\Ofertas.cshtml.g.cs
-C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Perfil\Index.cshtml.g.cs
+C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Avaliacao\Index.cshtml.g.cs

@@ -1,8 +1,8 @@
-﻿@model AppBarganhaWEB.Models.UsuarioVO
+﻿@model AppBarganhaWEB.ViewsObject.UsuarioVO
 
 <script src="~/js/site.js"></script>
 
-@using (Html.BeginForm("Cadastrar", "Usuario", FormMethod.Post))
+@using (Html.BeginForm("CadastrarOuAtualizar", "Usuario", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -10,7 +10,7 @@
         <main class="d-flex justify-content-center">
             <div class="">
                 <div class="form-group" id="tipoPessoa">
-                    @Html.LabelFor(model => model.Login, "Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.TipoUsuario, "Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @foreach (var tipo in ViewBag.TipoUsuario as List<string>)
                         {
@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="form-group" id="documento">
-                    @Html.LabelFor(model => model.Login, "Documento", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Documento, "Documento", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.Documento, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
@@ -69,6 +69,13 @@
                     </div>
                 </div>
 
+                <div class="form-group" id="foto">
+                    @Html.LabelFor(model => model.Foto, "Fotos", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Foto, new { type = "file" })
+                    </div>
+                </div>
+
                 <div class="form-group">
                     @Html.LabelFor(model => model.Endereco.Cep, "Cep", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10" id="cep">
@@ -104,13 +111,25 @@
                     </div>
                 </div>
 
-                <div class="d-flex py-2">
+                <div class="form-group" id="picDocumentos">
+                    @Html.LabelFor(model => model.Documentos, "Documentos", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        <input type="submit" id="cadastrarUsuario" value="Cadastrar" class="btn btn-success form-control px-5" />
+                        @Html.TextBoxFor(model => model.Documentos, new { type = "file" })
                     </div>
                 </div>
 
+                <div class="d-flex py-2">
+                    <div class="col-md-10">
+                        <input type="submit" id="cadastrarUsuario" value="@( Model.id != null ? "Atualizar" : "Cadastrar" )" class="btn btn-success form-control px-5" />
+                    </div>
+
+                </div>
+
+                @Html.HiddenFor(m => m.id)
+
             </div>
+
         </main>
+
     </div>
 }

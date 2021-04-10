@@ -1,10 +1,12 @@
 ﻿using AppBarganhaWEB.Models;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 
 namespace AppBarganhaWEB.ViewsObject
 {
     public class AnuncioVO
     {
+        public IFormFile picAnuncio { get; set; }
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
         public string Nome { get; set; }

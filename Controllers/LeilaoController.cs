@@ -25,7 +25,7 @@ namespace AppBarganhaWEB.Controllers
 
             var leilaoVO = new LeilaoVO
             {
-                Anuncios = _anuncioService.GetPorCategoria(usuario.Interesses, usuarioLogado.Id)
+                Anuncios = _anuncioService.GetPorCategoriaEmAberto(usuario.Interesses, usuarioLogado.Id)
             };
 
             return View(leilaoVO);

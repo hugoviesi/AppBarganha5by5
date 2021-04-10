@@ -50,29 +50,55 @@ namespace AppBarganhaWEB.Services
             return null;
         }
 
-        public void Criar(UsuarioVO usuarioVO)
+        public Usuario CriarOrAtualizar(UsuarioVO usuarioVO)
         {
             if (!Documento.EhValido(usuarioVO.Documento))
             {
                 throw new Exception("Documento inválido");
             }
 
-            if (usuarioVO.Documento.Length == 11)
-            {
-                var pessoaFisica = new PessoaFisica
-                {
-                    Nome = usuarioVO.Nome,
-                    Cpf = usuarioVO.Documento,
-                    Endereco = usuarioVO.Endereco,
-                    Login = usuarioVO.Login,
-                    Senha = Senha.GeraHash(usuarioVO.Senha),
-                    Interesses = usuarioVO.GetInteresses(usuarioVO.InteressesSelecionados)
-                };
+            var ehAtualizar = usuarioVO.id != null && usuarioVO.id != "";
 
-                _pessoaFisicaService.Create(pessoaFisica);
-            }
-            else if (usuarioVO.Documento.Length == 14)
+            if (usuarioVO.TipoUsuario.Contains("Física"))
             {
+                return criarOuAtualizarPessoaFisica(usuarioVO, ehAtualizar);
+
+            }
+            else if (usuarioVO.TipoUsuario.Contains("Jurídica"))
+            {
+                return criarOuAtualizarPessoaJuridica(usuarioVO, ehAtualizar);
+            }
+            else
+            {
+                throw new Exception("Tipo de documento desconhecido.");
+            }
+        }
+
+        private Usuario criarOuAtualizarPessoaJuridica(UsuarioVO usuarioVO, bool ehAtualizar)
+        {
+
+            if (ehAtualizar)
+            {
+
+                var usuarioAtual = _pessoaJuridicaService.Get(usuarioVO.id);
+                usuarioAtual.RazaoSocial = usuarioVO.RazaoSocial;
+                usuarioAtual.NomeFantasia = usuarioVO.NomeFantasia;
+                usuarioAtual.Cnpj = usuarioVO.Documento;
+                usuarioAtual.Endereco = usuarioVO.Endereco;
+                usuarioAtual.Login = usuarioVO.Login;
+                usuarioAtual.Interesses = usuarioVO.GetInteresses(usuarioVO.InteressesSelecionados);
+                if (usuarioVO.Senha != null)
+                {
+                    usuarioAtual.Senha = Senha.GeraHash(usuarioVO.Senha);
+                }
+
+                _pessoaJuridicaService.Update(usuarioAtual.Id, usuarioAtual);
+                return usuarioAtual;
+
+            }
+            else
+            {
+
                 var pessoaJuridica = new PessoaJuridica
                 {
                     RazaoSocial = usuarioVO.RazaoSocial,
@@ -84,14 +110,44 @@ namespace AppBarganhaWEB.Services
                     Interesses = usuarioVO.GetInteresses(usuarioVO.InteressesSelecionados)
                 };
 
-                _pessoaJuridicaService.Create(pessoaJuridica);
-            }
-            else
-            {
-                throw new Exception("Tipo de documento desconhecido.");
+                return _pessoaJuridicaService.Create(pessoaJuridica);
             }
         }
 
+        private Usuario criarOuAtualizarPessoaFisica(UsuarioVO usuarioVO, bool ehAtualizar)
+        {
+            if (ehAtualizar)
+            {
 
+                var usuarioAtual = _pessoaFisicaService.Get(usuarioVO.id);
+                usuarioAtual.Nome = usuarioVO.Nome;
+                usuarioAtual.Cpf = usuarioVO.Documento;
+                usuarioAtual.Endereco = usuarioVO.Endereco;
+                usuarioAtual.Login = usuarioVO.Login;
+                usuarioAtual.Interesses = usuarioVO.GetInteresses(usuarioVO.InteressesSelecionados);
+                if (usuarioVO.Senha != null)
+                {
+                    usuarioAtual.Senha = Senha.GeraHash(usuarioVO.Senha);
+                }
+
+                _pessoaFisicaService.Update(usuarioAtual.Id, usuarioAtual);
+                return usuarioAtual;
+            }
+            else
+            {
+
+                var pessoaFisica = new PessoaFisica
+                {
+                    Nome = usuarioVO.Nome,
+                    Cpf = usuarioVO.Documento,
+                    Endereco = usuarioVO.Endereco,
+                    Login = usuarioVO.Login,
+                    Senha = Senha.GeraHash(usuarioVO.Senha),
+                    Interesses = usuarioVO.GetInteresses(usuarioVO.InteressesSelecionados)
+                };
+
+               return _pessoaFisicaService.Create(pessoaFisica);
+            }
+        }
     }
 }

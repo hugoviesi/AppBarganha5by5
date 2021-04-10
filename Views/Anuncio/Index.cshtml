@@ -1,4 +1,4 @@
-﻿@model AppBarganhaWEB.Models.AnuncioVO
+﻿@model AppBarganhaWEB.ViewsObject.AnuncioVO
 
 @using (Html.BeginForm("Cadastrar", "Anuncio", FormMethod.Post))
 {
@@ -33,6 +33,12 @@
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.Valor, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="d-flex py-2">
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.picAnuncio, new { type = "file" })
                     </div>
                 </div>
 

@@ -35,9 +35,7 @@ namespace AppBarganhaWEB
             services.AddSingleton<PessoaFisicaService>();
             services.AddSingleton<PessoaJuridicaService>();
             services.AddSingleton<AnuncioService>();
-
             services.AddControllersWithViews();
-
             services.AddDistributedMemoryCache();
 
             services.AddSession(Options =>
@@ -61,17 +59,12 @@ namespace AppBarganhaWEB
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseSession();
-
             app.UseRouting();
-
-            //app.UseAuthorization();
-
             app.UseMiddleware<LoginMiddleware>();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

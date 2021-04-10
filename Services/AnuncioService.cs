@@ -41,11 +41,14 @@ namespace AppBarganha.Services
         public void Remove(string id) =>
             _anuncios.DeleteOne(anuncio => anuncio.Id == id);
 
-        public List<Anuncio> GetPorCategoria(List<Categoria> categorias, string idUsuarioLogado)
+        public List<Anuncio> GetPorCategoriaEmAberto(List<Categoria> categorias, string idUsuarioLogado)
         {
-            return _anuncios.Find<Anuncio>(anuncio => anuncio.Categorias == categorias && anuncio.IdUsuario != idUsuarioLogado).ToList();
+            return _anuncios.Find<Anuncio>(
+                anuncio => anuncio.Categorias.Any(c => categorias.Contains(c)) 
+                && anuncio.IdUsuario != idUsuarioLogado
+                && anuncio.Status == StatusAnuncio.ABERTO
+            ).ToList();
         }
-
 
     }
 }

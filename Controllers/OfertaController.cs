@@ -45,7 +45,8 @@ namespace AppBarganhaWEB.Controllers
                 DataOferta = DateTime.Now,
                 DataAtualizacao = DateTime.Now,
                 Valor = ofertaVO.Valor,
-                Descricao = ofertaVO.Descricao
+                Descricao = ofertaVO.Descricao,
+                Status = OfertaStatus.ABERTO
             };
 
             _ofertaService.Create(oferta);
@@ -65,5 +66,34 @@ namespace AppBarganhaWEB.Controllers
 
             return View(ofertasAnuncio);
         }
+
+        public IActionResult Aceitar()
+        {
+            var idOferta = HttpContext.Request.Query["idOferta"];
+
+            var ofertaAtual = _ofertaService.Get(idOferta);
+            ofertaAtual.Status = OfertaStatus.ACEITO;
+            ofertaAtual.DataAtualizacao = DateTime.Now;
+            _ofertaService.Update(ofertaAtual.Id, ofertaAtual);
+
+            var anuncio = _anuncioService.Get(ofertaAtual.IdAnuncio);
+            anuncio.Status = StatusAnuncio.ENCERRADO;
+            _anuncioService.Update(anuncio.Id, anuncio);
+
+            return RedirectToAction("Index", "Avalicao");
+        }
+
+        public IActionResult Recusar()
+        {
+            var idOferta = HttpContext.Request.Query["idOferta"];
+         
+            var ofertaAtual = _ofertaService.Get(idOferta);
+            ofertaAtual.Status = OfertaStatus.RECUSADO;
+            ofertaAtual.DataAtualizacao = DateTime.Now;
+            _ofertaService.Update(ofertaAtual.Id, ofertaAtual);
+
+            return RedirectToAction("OfertasPorAnuncio", "Oferta", new { idAnuncio = ofertaAtual.IdAnuncio });
+        }
+
     }
 }

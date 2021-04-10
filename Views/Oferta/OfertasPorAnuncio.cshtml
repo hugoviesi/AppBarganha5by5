@@ -17,7 +17,6 @@
             <th scope="col">@Model.Anuncio.Valor</th>
         </tr>
     </thead>
-    }
 </table>
 
 <h1>Ofertas</h1>
@@ -26,9 +25,9 @@
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Ofertante</th>
             <th scope="col">Descrição</th>
             <th scope="col">Valor</th>
+            <th scope="col">Status</th>
         </tr>
     </thead>
     @{
@@ -40,6 +39,20 @@
                     <th scope="row">@count</th>
                     <td>@oferta.Descricao</td>
                     <td>@oferta.Valor</td>
+                    @{ if (oferta.Status == OfertaStatus.ABERTO)
+                        {
+                            <td>
+                                @Html.ActionLink("Aceitar", "Aceitar", "Oferta", new { idOferta = oferta.Id }, null)
+                                @Html.ActionLink("Recusar", "Recusar", "Oferta", new { idOferta = oferta.Id }, null)
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @oferta.Status.ToString()
+                            </td>
+                        }
+                    }
                 </tr>
             </tbody>
             count++;

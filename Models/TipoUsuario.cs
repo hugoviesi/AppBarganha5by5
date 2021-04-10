@@ -3,7 +3,6 @@
     public enum TipoUsuario
     {
         FISICA = 1,
-        JURIDICA = 2,
-
+        JURIDICA = 2
     }
 }

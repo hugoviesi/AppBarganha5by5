@@ -3,30 +3,28 @@
 
 // Write your JavaScript code.
 
-$.when($.ready).then(function () {
-
+$(function () {
 
     function preencheEndereco() {
 
         $('#cep input').on("blur", function (event) {
 
-            $.getJSON("https://viacep.com.br/ws/" + $('#cep input').val().replace('-', '').replace('.', '') + "/json", function (rs) {
-
-                $('#logradouro input').val(rs.logradouro)
-                $('#bairro input').val(rs.bairro)
-                $('#localidade input').val(rs.localidade)
-                $('#uf input').val(rs.uf)
+            $.getJSON("https://viacep.com.br/ws/" + $('#cep input').val().replace('-', '').replace('.', '') + "/json", function (cep) {
+                $('#logradouro input').val(cep.logradouro)
+                $('#bairro input').val(cep.bairro)
+                $('#localidade input').val(cep.localidade)
+                $('#uf input').val(cep.uf)
             });
-
         });
-
     }
 
     function trataTipoDeFormularioPorPessoa() {
 
         $('#tipoPessoa input').on('click', function (event) {
             var tipoUsuarioSelecionado = $("#tipoPessoa input[name='TipoUsuario']:checked").val()
+
             exibeCamposFormularioUsuarioPorTipo(tipoUsuarioSelecionado)
+            exibePerfilPorUsuario(tipoUsuarioSelecionado)
         })
 
     }
@@ -47,6 +45,8 @@ $.when($.ready).then(function () {
             $('#nomeFantasia').hide()
             $('#nomeFantasia input').val("")
 
+            $('#picDocumentos').hide()
+            $('#picDocumentos').val("")
         } else {
 
             $('#nomeFisico').hide()
@@ -56,8 +56,20 @@ $.when($.ready).then(function () {
 
             $('#nomeFantasia').show()
 
+            $('#picDocumentos').show()
         }
     }
+
+    function exibePerfilPorUsuario(tipoUsuarioSelecionado) {
+        if (tipoUsuarioSelecionado == 'Pessoa Física') {
+            $('#cabNome').show()
+            $('#tabNome').show()
+        } else {
+            $('#cabNome').hide()
+            $('#tabNome').hide()
+        }
+    }
+
 
     function validaDocumento() {
 
