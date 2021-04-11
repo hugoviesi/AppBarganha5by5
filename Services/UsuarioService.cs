@@ -17,6 +17,26 @@ namespace AppBarganhaWEB.Services
             _pessoaJuridicaService = pessoaJuridicaService;
         }
 
+        public Usuario Get(string id)
+        {
+            var pessoaFisica = _pessoaFisicaService.Get(id);
+
+            if (pessoaFisica != null)
+            {
+                return pessoaFisica;
+            }
+
+            var pessoaJuridica = _pessoaJuridicaService.Get(id);
+
+            if (pessoaJuridica != null)
+            {
+                return pessoaJuridica;
+            }
+
+            return null;
+        }
+
+
         public Usuario GetUsuario(string id, TipoUsuario tipoUsuario)
         {
             if (tipoUsuario == TipoUsuario.FISICA)
@@ -101,6 +121,7 @@ namespace AppBarganhaWEB.Services
 
                 var pessoaJuridica = new PessoaJuridica
                 {
+                    Pontuacao = 0,
                     RazaoSocial = usuarioVO.RazaoSocial,
                     NomeFantasia = usuarioVO.NomeFantasia,
                     Cnpj = usuarioVO.Documento,
@@ -138,6 +159,7 @@ namespace AppBarganhaWEB.Services
 
                 var pessoaFisica = new PessoaFisica
                 {
+                    Pontuacao = 0,
                     Nome = usuarioVO.Nome,
                     Cpf = usuarioVO.Documento,
                     Endereco = usuarioVO.Endereco,
@@ -148,6 +170,23 @@ namespace AppBarganhaWEB.Services
 
                return _pessoaFisicaService.Create(pessoaFisica);
             }
+        }
+
+        public Usuario AtualizarPontuacao(string idUsuario, int pontos)
+        {
+            var usuario = Get(idUsuario);
+            usuario.Pontuacao += pontos;
+
+            if (usuario is PessoaFisica)
+            {
+                _pessoaFisicaService.Update(idUsuario, usuario as PessoaFisica);
+            }
+            else
+            {
+                _pessoaJuridicaService.Update(idUsuario, usuario as PessoaJuridica);
+            }
+
+            return usuario;
         }
     }
 }

@@ -1,27 +1,79 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AppBarganhaWEB.Models;
+using AppBarganhaWEB.Services;
+using AppBarganhaWEB.ViewsObject;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AppBarganhaWEB.Controllers
 {
     public class AvaliacaoController : Controller
     {
+        private readonly OfertaService _ofertaService;
+        private readonly AnuncioService _anuncioService;
+        private readonly UsuarioService _usuarioService;
+
+        public AvaliacaoController(OfertaService ofertaService, AnuncioService anuncioService, UsuarioService usuarioService)
+        {
+            _ofertaService = ofertaService;
+            _anuncioService = anuncioService;
+            _usuarioService = usuarioService;
+        }
+
         public IActionResult Index()
         {
-            // pegar id oferta 
+            var ofertaId = HttpContext.Request.Query["idOferta"];
+            var modo = HttpContext.Request.Query["modo"];
 
-            // pela oferta (id do usuario ofertante)
+            var oferta = _ofertaService.Get(ofertaId);
+            var anuncio = _anuncioService.Get(oferta.IdAnuncio);
 
-            // busca usaurio por di ofertanete
+            Usuario usuario = null;
+            if (modo == "OFERTANTE")
+            {
+                usuario = _usuarioService.Get(oferta.IdUsuarioOfertante);
+            }
+            else if (modo == "ANUNCIANTE")
+            {
+                usuario = _usuarioService.Get(anuncio.IdUsuario);
+            }
+            else
+            {
+                throw new Exception("modo desconhecido");
+            };
 
-            // buscar anuncio 
+            var avaliacaoVO = new AvaliacaoVO
+            {
+                Oferta = oferta,
+                Anuncio = anuncio,
+                Usuario = usuario,
+                Modo = modo
+            };
 
-            // busca usuario por id do criador do anuncio
+            return View(avaliacaoVO);
+        }
 
+        public IActionResult Avaliar(AvaliarVO avaliarVO)
+        {
+            int pontos = 0;
 
-            return View();
+            if(avaliarVO.Pontos == "Positivo")
+            {
+                pontos = 2;
+            }
+            else if(avaliarVO.Pontos == "Neutro")
+            {
+                pontos = 1;
+            }
+            else
+            {
+                pontos = -2;
+            }
+
+            _usuarioService.AtualizarPontuacao(avaliarVO.Usuario.Id, pontos);
+
+            return RedirectToAction("Index", "Home");
         }
     }
+
+    
 }

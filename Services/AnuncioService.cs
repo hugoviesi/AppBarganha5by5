@@ -4,7 +4,7 @@ using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AppBarganha.Services
+namespace AppBarganhaWEB.Services
 {
     public class AnuncioService
     {

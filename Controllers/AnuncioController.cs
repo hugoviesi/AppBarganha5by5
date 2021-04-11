@@ -1,4 +1,4 @@
-﻿using AppBarganha.Services;
+﻿using AppBarganhaWEB.Services;
 using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Utils;
 using AppBarganhaWEB.ViewsObject;

@@ -1,21 +1,25 @@
 ﻿@model AppBarganhaWEB.ViewsObject.HomeVO
 
-<h1>Bem-Vindo, @Model.UsuarioLogado.Nome</h1>
+<h1>Bem-Vindo, @Model.UsuarioLogado.Login (Pontuação: @Model.UsuarioLogado.Pontuacao)</h1>
 
 <div class="btn-group" role="group" aria-label="Exemplo básico">
-    <div class="col-md-10">
+    <div class="col-md-5">
         @Html.ActionLink("Anunciar", "Index", "Anuncio")
     </div>
 
-    <div class="col-md-10">
+    <div class="col-md-5">
         @Html.ActionLink("Leilão", "Index", "Leilao")
     </div>
 
-    <div class="col-md-10">
+    <div class="col-md-5">
+        @Html.ActionLink("Minhas Ofertas", "OfertasOfertante", "Oferta")
+    </div>
+
+    <div class="col-md-5">
         @Html.ActionLink("Perfil", "Perfil", "Usuario")
     </div>
 
-    <div class="col-md-10">
+    <div class="col-md-5">
         @Html.ActionLink("Sair", "LogOut", "Login")
     </div>
 </div>

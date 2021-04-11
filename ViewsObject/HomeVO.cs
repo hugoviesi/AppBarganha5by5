@@ -5,7 +5,7 @@ namespace AppBarganhaWEB.ViewsObject
 {
     public class HomeVO
     {
-        public UsuarioLogado UsuarioLogado { get; set; }
+        public Usuario UsuarioLogado { get; set; }
 
         public List<Anuncio> Anuncios { get; set; }
 

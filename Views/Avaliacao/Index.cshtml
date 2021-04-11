@@ -1,5 +1,100 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model AppBarganhaWEB.ViewsObject.AvaliacaoVO
+
+<h2>DETALHES DO ANÚNCIO</h2>
+
 @{
+    var anuncio = Model.Anuncio;
+
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Valor</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>@anuncio.Nome</td>
+                <td>@anuncio.Descricao</td>
+                <td>@anuncio.Valor</td>
+            </tr>
+        </tbody>
+
+    </table>
+}
+
+
+<h2>DETALHES DA OFERTA</h2>
+
+@{
+    var oferta = Model.Oferta;
+
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th scope="col">Descrição</th>
+                <th scope="col">Valor</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>@oferta.Descricao</td>
+                <td>@oferta.Valor</td>
+            </tr>
+        </tbody>
+
+    </table>
+}
+
+@if (Model.Modo == "ANUNCIANTE")
+{
+    <h2>DETALHES DO ANUNCIANTE</h2>
+}
+else
+{
+    <h2>DETALHES DO OFERTANTE</h2>
+}
+
+@{
+    var usuario = Model.Usuario;
+
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th scope="col">Login</th>
+                <th scope="col">Pontuação</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>@usuario.Login</td>
+                <td>@usuario.Pontuacao</td>
+            </tr>
+        </tbody>
+
+    </table>
+}
+
+@using (Html.BeginForm("Avaliar", "Avaliacao", FormMethod.Post))
+{
+    <div class="col-md-10">
+        Positivo:   @Html.RadioButton("Pontos", "Positivo")<br />
+        Neutro: @Html.RadioButton("Pontos", "Neutro")<br />
+        Negativo: @Html.RadioButton("Pontos", "Negativo")
+    </div>
+
+    <div class="d-flex py-2">
+        <div class="col-md-10">
+            <input type="submit" value="Avaliar" class="btn btn-success form-control px-5" />
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.Usuario.Id)
 }

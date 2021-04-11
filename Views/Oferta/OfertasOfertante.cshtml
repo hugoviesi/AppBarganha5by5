@@ -1,0 +1,54 @@
+﻿@model AppBarganhaWEB.ViewsObject.OfertasOfertantesVO
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Data de Oferta</th>
+            <th scope="col">Ação</th>
+        </tr>
+    </thead>
+    @{
+        int count = 1;
+        @foreach (var oferta in Model.Ofertas)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@oferta.Descricao</td>
+                    <td>@oferta.Valor</td>
+                    <td>@oferta.DataOferta</td>
+                    <td>@oferta.Status</td>
+                    @if (oferta.Status == OfertaStatus.ACEITO)
+                    {
+                        <td>
+                            <div class="d-flex py-2">
+                                <div class="col-md-10">
+                                    @Html.ActionLink("Avaliar", "Index", "Avaliacao", new { idOferta = oferta.Id, modo = "ANUNCIANTE" }, null)
+                                </div>
+                            </div>
+                        </td>
+                    }
+                    else if (oferta.Status == OfertaStatus.RECUSADO)
+                    {
+                        <td>
+                            <div class="d-flex py-2">
+                                <div class="col-md-10">
+                                    @Html.ActionLink("Ofertar", "Index", "Oferta", new { idAnuncio = oferta.IdAnuncio }, null)
+                                </div>
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>Aguardando</td>
+                    }
+
+                </tr>
+            </tbody>
+            count++;
+        }
+    }
+</table>

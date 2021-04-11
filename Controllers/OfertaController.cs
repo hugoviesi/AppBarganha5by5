@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace AppBarganhaWEB.Controllers
+
 {
     public class OfertaController : Controller
     {
@@ -80,7 +81,7 @@ namespace AppBarganhaWEB.Controllers
             anuncio.Status = StatusAnuncio.ENCERRADO;
             _anuncioService.Update(anuncio.Id, anuncio);
 
-            return RedirectToAction("Index", "Avalicao");
+            return RedirectToAction("Index", "Avaliacao", new { idOferta = ofertaAtual.Id, modo = "OFERTANTE"});
         }
 
         public IActionResult Recusar()
@@ -93,6 +94,20 @@ namespace AppBarganhaWEB.Controllers
             _ofertaService.Update(ofertaAtual.Id, ofertaAtual);
 
             return RedirectToAction("OfertasPorAnuncio", "Oferta", new { idAnuncio = ofertaAtual.IdAnuncio });
+        }
+
+        public IActionResult OfertasOfertante()
+        {
+            var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
+
+            var ofertas = _ofertaService.GetPorUsuarioOfertante(usuarioLogado.Id);
+
+            var ofertasOfertante = new OfertasOfertantesVO
+            {
+                Ofertas = ofertas
+            };
+
+            return View(ofertasOfertante);
         }
 
     }
