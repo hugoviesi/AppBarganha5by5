@@ -16,7 +16,7 @@ namespace AppBarganhaWEB.Models
         public DateTime DataAtualizacao { get; set; }
         public decimal Valor { get; set; }
         public string Descricao { get; set; }
-
+        public bool OfertanteAvaliado { get; set; }
         public OfertaStatus Status { get; set; }
 
     }

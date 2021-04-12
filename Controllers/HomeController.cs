@@ -28,5 +28,10 @@ namespace AppBarganhaWEB.Controllers
 
             return View(homeVO);
         }
+
+        public IActionResult Chat()
+        {
+            return View();
+        }
     }
 }

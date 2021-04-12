@@ -14,7 +14,7 @@ namespace AppBarganhaWEB.Models
         public DateTime DataPublicacao { get; set; }
         public string FileName { get; set; }
         public decimal Valor { get; set; }
-
+        public bool AnuncianteAvaliado { get; set; }
         public string Nome { get; set; }
         public List<Categoria> Categorias { get; set; }
 

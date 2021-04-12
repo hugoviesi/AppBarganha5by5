@@ -1,5 +1,6 @@
 ﻿@model AppBarganhaWEB.ViewsObject.HomeVO
 
+
 <h1>Bem-Vindo, @Model.UsuarioLogado.Login (Pontuação: @Model.UsuarioLogado.Pontuacao)</h1>
 
 <div class="btn-group" role="group" aria-label="Exemplo básico">
@@ -17,6 +18,10 @@
 
     <div class="col-md-5">
         @Html.ActionLink("Perfil", "Perfil", "Usuario")
+    </div>
+
+    <div class="col-md-5">
+        @Html.ActionLink("Chat", "Chat", "Home")
     </div>
 
     <div class="col-md-5">

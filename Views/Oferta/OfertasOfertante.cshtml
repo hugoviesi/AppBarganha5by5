@@ -8,6 +8,7 @@
             <th scope="col">Valor</th>
             <th scope="col">Data de Oferta</th>
             <th scope="col">Ação</th>
+            <th scope="col">Situação</th>
         </tr>
     </thead>
     @{
@@ -23,13 +24,21 @@
                     <td>@oferta.Status</td>
                     @if (oferta.Status == OfertaStatus.ACEITO)
                     {
-                        <td>
-                            <div class="d-flex py-2">
-                                <div class="col-md-10">
-                                    @Html.ActionLink("Avaliar", "Index", "Avaliacao", new { idOferta = oferta.Id, modo = "ANUNCIANTE" }, null)
+                        @if (oferta.OfertanteAvaliado == false)
+                        {
+                            <td>
+                                <div class="d-flex py-2">
+                                    <div class="col-md-10">
+                                        @Html.ActionLink("Avaliar", "Index", "Avaliacao", new { idOferta = oferta.Id, modo = "ANUNCIANTE" }, null)
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>ENCERRADO</td>
+                        }
+
                     }
                     else if (oferta.Status == OfertaStatus.RECUSADO)
                     {

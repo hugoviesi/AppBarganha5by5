@@ -8,6 +8,8 @@ namespace AppBarganhaWEB.ViewsObject
 {
     public class AvaliarVO
     {
+        public string Modo { get; set; }
+        public Oferta Oferta { get; set; }
         public Usuario Usuario { get; set; }
         public string Pontos { get; set; }
     }

@@ -54,13 +54,27 @@ namespace AppBarganhaWEB.Controllers
 
         public IActionResult Avaliar(AvaliarVO avaliarVO)
         {
+            var oferta = _ofertaService.Get(avaliarVO.Oferta.Id);
+            var anuncio = _anuncioService.Get(oferta.IdAnuncio);
+
+            if (avaliarVO.Modo == "OFERTANTE")
+            {
+                oferta.OfertanteAvaliado = true;
+                _ofertaService.Update(oferta.Id, oferta);
+            }
+            else if (avaliarVO.Modo == "ANUNCIANTE")
+            {
+                anuncio.AnuncianteAvaliado = true;
+                _anuncioService.Update(anuncio.Id, anuncio);
+            }
+
             int pontos = 0;
 
-            if(avaliarVO.Pontos == "Positivo")
+            if (avaliarVO.Pontos == "Positivo")
             {
                 pontos = 2;
             }
-            else if(avaliarVO.Pontos == "Neutro")
+            else if (avaliarVO.Pontos == "Neutro")
             {
                 pontos = 1;
             }
@@ -75,5 +89,5 @@ namespace AppBarganhaWEB.Controllers
         }
     }
 
-    
+
 }

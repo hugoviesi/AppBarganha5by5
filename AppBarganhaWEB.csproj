@@ -5,13 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.12.1" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\picAnuncio\" />
   </ItemGroup>
 
 </Project>
