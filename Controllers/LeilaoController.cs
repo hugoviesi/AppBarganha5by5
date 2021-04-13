@@ -1,5 +1,4 @@
-﻿using AppBarganha.Services;
-using AppBarganhaWEB.Services;
+﻿using AppBarganhaWEB.Services;
 using AppBarganhaWEB.Utils;
 using AppBarganhaWEB.ViewsObject;
 using Microsoft.AspNetCore.Mvc;

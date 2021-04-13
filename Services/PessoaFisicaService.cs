@@ -23,6 +23,12 @@ namespace AppBarganha.Services
         public PessoaFisica Get(string id) =>
             _pessoaFisica.Find<PessoaFisica>(pessoaFisica => pessoaFisica.Id == id).FirstOrDefault();
 
+        public PessoaFisica GetDocumento(string documento) =>
+            _pessoaFisica.Find<PessoaFisica>(pessoaFisica => pessoaFisica.Cpf == documento).FirstOrDefault();
+
+        public PessoaFisica GetLogin(string login) =>
+            _pessoaFisica.Find<PessoaFisica>(pessoaFisica => pessoaFisica.Login == login).FirstOrDefault();
+
         public PessoaFisica Create(PessoaFisica pessoaFisica)
         {
             _pessoaFisica.InsertOne(pessoaFisica);

@@ -62,7 +62,6 @@ namespace AppBarganhaWEB.Controllers
             }
             else
             {
-
                 var pessoaJurudica = usuario as PessoaJuridica;
 
                 var usuarioVO = new UsuarioVO
@@ -76,6 +75,7 @@ namespace AppBarganhaWEB.Controllers
                     Endereco = pessoaJurudica.Endereco,
                     InteressesSelecionados = pessoaJurudica.Interesses.Select(cat => (int)cat).ToList()
                 };
+
 
                 return View("Index", usuarioVO);
             };

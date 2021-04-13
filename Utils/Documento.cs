@@ -1,4 +1,6 @@
-﻿namespace AppBarganhaWEB.Utils
+﻿using AppBarganha.Services;
+
+namespace AppBarganhaWEB.Utils
 {
     public class Documento
     {

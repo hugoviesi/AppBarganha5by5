@@ -85,7 +85,7 @@
                                     @Html.ActionLink("Recusar", "Recusar", "Oferta", new { idOferta = oferta.Id }, null)
                                 </td>
                             }
-                            else if (oferta.Status == OfertaStatus.ACEITO)
+                            else if (oferta.Status == OfertaStatus.ACEITO && oferta.OfertanteAvaliado == false)
                             {
                                 <td>
                                     @Html.ActionLink("Avaliar", "Index", "Avaliacao", new { idOferta = oferta.Id, modo = "OFERTANTE" }, null)

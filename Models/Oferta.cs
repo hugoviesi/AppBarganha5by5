@@ -17,6 +17,7 @@ namespace AppBarganhaWEB.Models
         public decimal Valor { get; set; }
         public string Descricao { get; set; }
         public bool OfertanteAvaliado { get; set; }
+        public bool AnuncianteAvaliado { get; set; }
         public OfertaStatus Status { get; set; }
 
     }

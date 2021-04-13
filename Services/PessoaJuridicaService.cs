@@ -23,6 +23,12 @@ namespace AppBarganha.Services
         public PessoaJuridica Get(string id) =>
             _PessoaJuridica.Find<PessoaJuridica>(pessoaJuridica => pessoaJuridica.Id == id).FirstOrDefault();
 
+        public PessoaJuridica GetDocumento(string documento) =>
+            _PessoaJuridica.Find<PessoaJuridica>(pessoaJuridica => pessoaJuridica.Cnpj == documento).FirstOrDefault();
+
+        public PessoaJuridica GetLogin(string login) =>
+            _PessoaJuridica.Find<PessoaJuridica>(pessoaJuridica => pessoaJuridica.Login == login).FirstOrDefault();
+
         public PessoaJuridica Create(PessoaJuridica pessoaJuridica)
         {
             _PessoaJuridica.InsertOne(pessoaJuridica);

@@ -2,9 +2,7 @@
 using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Utils;
 using AppBarganhaWEB.ViewsObject;
-using Microsoft.AspNetCore.Hosting;
 using System;
-using System.IO;
 
 namespace AppBarganhaWEB.Services
 {
@@ -83,12 +81,12 @@ namespace AppBarganhaWEB.Services
 
             if (usuarioVO.TipoUsuario.Contains("Física"))
             {
-                return criarOuAtualizarPessoaFisica(usuarioVO, ehAtualizar);
+                return CriarOuAtualizarPessoaFisica(usuarioVO, ehAtualizar);
 
             }
             else if (usuarioVO.TipoUsuario.Contains("Jurídica"))
             {
-                return criarOuAtualizarPessoaJuridica(usuarioVO, ehAtualizar);
+                return CriarOuAtualizarPessoaJuridica(usuarioVO, ehAtualizar);
             }
             else
             {
@@ -96,7 +94,7 @@ namespace AppBarganhaWEB.Services
             }
         }
 
-        private Usuario criarOuAtualizarPessoaJuridica(UsuarioVO usuarioVO, bool ehAtualizar)
+        private Usuario CriarOuAtualizarPessoaJuridica(UsuarioVO usuarioVO, bool ehAtualizar)
         {
 
             if (ehAtualizar)
@@ -120,6 +118,15 @@ namespace AppBarganhaWEB.Services
             }
             else
             {
+                if (ExisteDocumento(usuarioVO.Documento))
+                {
+                    throw new Exception("Documento já cadastrado");
+                }
+
+                if(ExisteLogin(usuarioVO.Login))
+                {
+                    throw new Exception("Login já cadastrado");
+                }
 
                 var pessoaJuridica = new PessoaJuridica
                 {
@@ -137,11 +144,10 @@ namespace AppBarganhaWEB.Services
             }
         }
 
-        private Usuario criarOuAtualizarPessoaFisica(UsuarioVO usuarioVO, bool ehAtualizar)
+        private Usuario CriarOuAtualizarPessoaFisica(UsuarioVO usuarioVO, bool ehAtualizar)
         {
             if (ehAtualizar)
             {
-
                 var usuarioAtual = _pessoaFisicaService.Get(usuarioVO.id);
                 usuarioAtual.Nome = usuarioVO.Nome;
                 usuarioAtual.Cpf = usuarioVO.Documento;
@@ -158,6 +164,16 @@ namespace AppBarganhaWEB.Services
             }
             else
             {
+                if (ExisteDocumento(usuarioVO.Documento))
+                {
+                    throw new Exception("Usuário já cadastrado");
+                }
+
+                if (ExisteLogin(usuarioVO.Login))
+                {
+                    throw new Exception("Login já cadastrado");
+                }
+
                 var pessoaFisica = new PessoaFisica
                 {
                     Pontuacao = 0,
@@ -188,6 +204,32 @@ namespace AppBarganhaWEB.Services
             }
 
             return usuario;
+        }
+
+        public bool ExisteDocumento(string documento)
+        {
+            if (_pessoaFisicaService.GetDocumento(documento) != null)
+            {
+                return true;
+            }
+            if (_pessoaJuridicaService.GetDocumento(documento) != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool ExisteLogin(string login)
+        {
+            if (_pessoaFisicaService.GetLogin(login) != null)
+            {
+                return true;
+            }
+            if (_pessoaJuridicaService.GetLogin(login) != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

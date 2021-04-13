@@ -55,17 +55,16 @@ namespace AppBarganhaWEB.Controllers
         public IActionResult Avaliar(AvaliarVO avaliarVO)
         {
             var oferta = _ofertaService.Get(avaliarVO.Oferta.Id);
-            var anuncio = _anuncioService.Get(oferta.IdAnuncio);
 
-            if (avaliarVO.Modo == "OFERTANTE")
+            if (avaliarVO.Modo == "ANUNCIANTE")
             {
-                oferta.OfertanteAvaliado = true;
+                oferta.AnuncianteAvaliado = true;
                 _ofertaService.Update(oferta.Id, oferta);
             }
-            else if (avaliarVO.Modo == "ANUNCIANTE")
-            {
-                anuncio.AnuncianteAvaliado = true;
-                _anuncioService.Update(anuncio.Id, anuncio);
+            else if (avaliarVO.Modo == "OFERTANTE") 
+            {                        
+                oferta.OfertanteAvaliado = true;
+                _ofertaService.Update(oferta.Id, oferta);
             }
 
             int pontos = 0;

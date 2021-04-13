@@ -61,37 +61,3 @@
         }
     </table>
 </div>
-
-@*<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Valor</th>
-            <th scope="col">Ofertar</th>
-        </tr>
-    </thead>
-    @{
-        int count = 1;
-        @foreach (var anuncio in Model.Anuncios)
-        {
-            <tbody>
-                <tr>
-                    <th scope="row">@count</th>
-                    <td>@anuncio.Nome</td>
-                    <td>@anuncio.Descricao</td>
-                    <td>@anuncio.Valor</td>
-                    <td>
-                        <div class="d-flex py-2">
-                            <div class="col-md-10">
-                                @Html.ActionLink("Ofertar", "Index", "Oferta", new { idAnuncio = anuncio.Id }, null)
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            count++;
-        }
-    }
-</table>*@
