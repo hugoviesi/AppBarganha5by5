@@ -1,5 +1,5 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿ Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. 
 
 a.navbar-brand {
   white-space: normal;
@@ -7,7 +7,7 @@ a.navbar-brand {
   word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
+ Provide sufficient contrast against white background 
 a {
   color: #0366d6;
 }
@@ -24,8 +24,8 @@ a {
   border-color: #1861ac;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
+ Sticky footer styles
+-------------------------------------------------- 
 html {
   font-size: 14px;
 }
@@ -51,15 +51,15 @@ button.accept-policy {
   line-height: inherit;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
+ Sticky footer styles
+-------------------------------------------------- 
 html {
   position: relative;
   min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
+   Margin bottom by footer height 
   margin-bottom: 60px;
 }
 .footer {
@@ -67,7 +67,7 @@ body {
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px;  Vertically center the text there 
 }
 
 * {
@@ -76,9 +76,6 @@ body {
 }
 
 body {
-    background: #765eab;
-    background: -webkit-linear-gradient(to left, #8c6cd0, #765eab);
-    background: linear-gradient(to left, #8c6cd0, #765eab);
     position: relative;
     width: 100vw;
     height: 100vh;
@@ -103,7 +100,7 @@ body {
     width: 15%;
 }
 
-/* Estilo dos cards representando usuário logado */
+ Estilo dos cards representando usuário logado 
 
 .user {
     position: relative;
@@ -146,7 +143,7 @@ body {
         opacity: 0.8;
     }
 
-/* Estilo para chat */
+ Estilo para chat 
 
 .chats_wrapper {
     position: absolute;
@@ -247,7 +244,7 @@ body {
         .chats_wrapper .chat.maximize {
         }
 
-/* Estilos genéricos */
+ Estilos genéricos 
 
 .box_shadow_0 {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);

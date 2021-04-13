@@ -1,68 +1,107 @@
 ﻿@model AppBarganhaWEB.ViewsObject.OfertasPorAnuncioVO
 
-<h1>Detalhes do Anuncio</h1>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand">
+        <img src="~/img/5by5.png" alt="logo" style="width:40px;">
+    </a>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Valor</th>
-        </tr>
-    </thead>
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">@Model.Anuncio.Nome</th>
-            <th scope="col">@Model.Anuncio.Valor</th>
-        </tr>
-    </thead>
-</table>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Home", "Index", "Home")</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Voltar", "Index", "Oferta")</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Sair", "LogOut", "Login")</a>
+        </li>
+    </ul>
+</nav>
+<br />
 
-<h1>Ofertas</h1>
+@{
+    var anuncio = Model.Anuncio;
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Valor</th>
-            <th scope="col">Status</th>
-        </tr>
-    </thead>
-    @{
-        int count = 1;
-        @foreach (var oferta in Model.Ofertas)
-        {
+    <div class="container">
+        <h2>Anúncio</h2>
+        <p>Detalhes do anúncio:</p>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Índice</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Data da Publicação</th>
+                    <th>Categoria</th>
+                </tr>
+            </thead>
+
             <tbody>
                 <tr>
-                    <th scope="row">@count</th>
-                    <td>@oferta.Descricao</td>
-                    <td>@oferta.Valor</td>
-                    @{ if (oferta.Status == OfertaStatus.ABERTO)
-                        {
-                            <td>
-                                @Html.ActionLink("Aceitar", "Aceitar", "Oferta", new { idOferta = oferta.Id }, null)
-                                @Html.ActionLink("Recusar", "Recusar", "Oferta", new { idOferta = oferta.Id }, null)
-                            </td>
-                        }
-                        else if (oferta.Status == OfertaStatus.ACEITO)
-                        {
-                            <td>
-                                @Html.ActionLink("Avaliar", "Index", "Avaliacao", new { idOferta = oferta.Id, modo = "OFERTANTE" }, null)
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                @oferta.Status.ToString()
-                            </td>
-                        }
-                    }
+                    <td>1</td>
+                    <td>@anuncio.Nome</td>
+                    <td>@anuncio.Descricao</td>
+                    <td>@anuncio.Valor</td>
+                    <td>@anuncio.DataPublicacao</td>
+                    <td>A FAZER</td>
                 </tr>
             </tbody>
-            count++;
-        }
-    }
-</table>
+        </table>
+    </div>
+}
 
+<br />
+
+<div class="container">
+    <h2>Oferta</h2>
+    <p>Detalhes da oferta:</p>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Índice</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Data da Oferta</th>
+                <th>Data da Atualização</th>
+                <th>Situação</th>
+            </tr>
+        </thead>
+        @{
+            int count = 1;
+            @foreach (var oferta in Model.Ofertas)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@count</th>
+                        <td>@oferta.Descricao</td>
+                        <td>@oferta.Valor</td>
+                        <td>@oferta.DataOferta</td>
+                        <td>@oferta.DataAtualizacao</td>
+                        @{ if (oferta.Status == OfertaStatus.ABERTO)
+                            {
+                                <td>
+                                    @Html.ActionLink("Aceitar", "Aceitar", "Oferta", new { idOferta = oferta.Id }, null)
+                                    @Html.ActionLink("Recusar", "Recusar", "Oferta", new { idOferta = oferta.Id }, null)
+                                </td>
+                            }
+                            else if (oferta.Status == OfertaStatus.ACEITO)
+                            {
+                                <td>
+                                    @Html.ActionLink("Avaliar", "Index", "Avaliacao", new { idOferta = oferta.Id, modo = "OFERTANTE" }, null)
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @oferta.Status.ToString()
+                                </td>
+                            }
+                        }
+                    </tr>
+                </tbody>
+                count++;
+            }
+        }
+    </table>
+</div>

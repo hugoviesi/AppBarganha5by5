@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.AspNetCore.Http;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,14 +18,16 @@ namespace AppBarganhaWEB.Models
         [Required]
         public string Senha { get; set; }
         
-        public Endereco Endereco { get; set; }
-        
-        public string Foto { get; set; } //TODO: REMOVER
+        public Endereco Endereco { get; set; }    
         
         public int Pontuacao { get; set; }
-       
-        public bool Vip { get; set; } //TODO: REMOVER
-        
+
+        public bool Vip { get; set; }
+
         public List<Categoria> Interesses { get; set; }
+
+        public IFormFile Foto { get; set; }
+
+        public string CaminhoFoto { get; set; }
     }
 }

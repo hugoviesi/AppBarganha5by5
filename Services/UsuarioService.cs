@@ -2,7 +2,9 @@
 using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Utils;
 using AppBarganhaWEB.ViewsObject;
+using Microsoft.AspNetCore.Hosting;
 using System;
+using System.IO;
 
 namespace AppBarganhaWEB.Services
 {
@@ -156,7 +158,6 @@ namespace AppBarganhaWEB.Services
             }
             else
             {
-
                 var pessoaFisica = new PessoaFisica
                 {
                     Pontuacao = 0,
@@ -168,7 +169,7 @@ namespace AppBarganhaWEB.Services
                     Interesses = usuarioVO.GetInteresses(usuarioVO.InteressesSelecionados)
                 };
 
-               return _pessoaFisicaService.Create(pessoaFisica);
+                return _pessoaFisicaService.Create(pessoaFisica);
             }
         }
 

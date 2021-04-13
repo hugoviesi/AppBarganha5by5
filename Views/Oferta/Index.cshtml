@@ -1,28 +1,56 @@
 ﻿@model AppBarganhaWEB.ViewsObject.OfertaVO
 
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand">
+        <img src="~/img/5by5.png" alt="logo" style="width:40px;">
+    </a>
 
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Home", "Index", "Home")</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Voltar", "Index", "Leilao")</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Sair", "LogOut", "Login")</a>
+        </li>
+    </ul>
+</nav>
+<br />
 @{
     var anuncio = Model.Anuncio;
+    <div class="container">
+        <h2>Ofertar</h2>
+        <p>Detalhes do anúncio a ser ofertado:</p>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Índice</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Data de Publicação</th>
+                    <th>Valor</th>
+                    <th>Categorias</th>
+                    <th>Foto</th>
+                    <th>Situação</th>
+                </tr>
+            </thead>
 
-    <table class="table table-striped">
-
-        <thead>
-            <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Valor</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>@anuncio.Nome</td>
-                <td>@anuncio.Descricao</td>
-                <td>@anuncio.Valor</td>
-            </tr>
-        </tbody>
-
-    </table>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>@anuncio.Nome</td>
+                    <td>@anuncio.Descricao</td>
+                    <td>@anuncio.DataPublicacao</td>
+                    <td>@anuncio.Valor</td>
+                    <td>A FAZER</td>
+                    <td>@anuncio.FileName</td>
+                    <td>@anuncio.Status</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 }
 
 @using (Html.BeginForm("Ofertar", "Oferta", FormMethod.Post))

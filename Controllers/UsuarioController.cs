@@ -2,8 +2,11 @@
 using AppBarganhaWEB.Services;
 using AppBarganhaWEB.Utils;
 using AppBarganhaWEB.ViewsObject;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace AppBarganhaWEB.Controllers
@@ -11,10 +14,12 @@ namespace AppBarganhaWEB.Controllers
     public class UsuarioController : Controller
     {
         private readonly UsuarioService _usuarioService;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public UsuarioController(UsuarioService usuarioService)
+        public UsuarioController(UsuarioService usuarioService, IWebHostEnvironment hostEnviroment)
         {
             _usuarioService = usuarioService;
+            _hostEnvironment = hostEnviroment;
         }
 
         public IActionResult Index()
@@ -91,5 +96,15 @@ namespace AppBarganhaWEB.Controllers
             }
         }
 
+        private async void InserirFoto(UsuarioVO usuarioVO)
+        {
+            string wwwwRootPath = _hostEnvironment.WebRootPath;
+            string nomeArquivo = Path.GetFileNameWithoutExtension(usuarioVO.Foto.FileName);
+            string extensao = Path.GetExtension(usuarioVO.Foto.FileName);
+            usuarioVO.CaminhoFoto = nomeArquivo + DateTime.Now.ToString("yymmssffff") + extensao;
+            string path = Path.Combine(wwwwRootPath + "/img/", usuarioVO.CaminhoFoto);
+            using var fs = new FileStream(path, FileMode.Create);
+            await usuarioVO.Foto.CopyToAsync(fs);
+        }
     }
 }

@@ -1,6 +1,68 @@
 ﻿@model AppBarganhaWEB.ViewsObject.LeilaoVO
 
-<table class="table table-striped">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand">
+        <img src="~/img/5by5.png" alt="logo" style="width:40px;">
+    </a>
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Home", "Index", "Home")</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Sair", "LogOut", "Login")</a>
+        </li>
+    </ul>
+</nav>
+<br />
+<div class="container">
+    <h2>Leilão</h2>
+    <p>Lista de anúncios com categorias em comum com seus interesses:</p>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Índice</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Data de Publicação</th>
+                <th>Valor</th>
+                <th>Categorias</th>
+                <th>Foto</th>
+                <th>Ofertar</th>
+                <th>Situação</th>
+            </tr>
+        </thead>
+        @{
+            int count = 1;
+
+            @foreach (var anuncio in Model.Anuncios)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@count</th>
+                        <td>@anuncio.Nome</td>
+                        <td>@anuncio.Descricao</td>
+                        <td>@anuncio.DataPublicacao</td>
+                        <td>@anuncio.Valor</td>
+                        <td>A FAZER</td>
+                        <td>@anuncio.FileName</td>
+                        <td>
+                            <div class="d-flex py-2">
+                                <div class="col-md-10">
+                                    @Html.ActionLink("Ofertar", "Index", "Oferta", new { idAnuncio = anuncio.Id }, null)
+                                </div>
+                            </div>
+                        </td>
+                        <td>@anuncio.Status</td>
+                    </tr>
+                </tbody>
+                count++;
+            }
+        }
+    </table>
+</div>
+
+@*<table class="table table-striped">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -32,4 +94,4 @@
             count++;
         }
     }
-</table>
+</table>*@

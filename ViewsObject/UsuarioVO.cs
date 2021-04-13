@@ -18,7 +18,7 @@ namespace AppBarganhaWEB.ViewsObject
         public string NomeFantasia { get; set; }
         public IFormFile Documentos { get; set; }
         public IFormFile Foto { get; set; }
-
+        public string CaminhoFoto { get; set; }
         public List<Categoria> GetInteresses(List<int> selecionados)
         {
             var interesses = new List<Categoria>();

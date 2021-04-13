@@ -1,100 +1,150 @@
 ﻿@model AppBarganhaWEB.ViewsObject.AvaliacaoVO
 
-<h2>DETALHES DO ANÚNCIO</h2>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand">
+        <img src="~/img/5by5.png" alt="logo" style="width:40px;">
+    </a>
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Home", "Index", "Home")</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Voltar", "OfertasOfertante", "Oferta")</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Sair", "LogOut", "Login")</a>
+        </li>
+    </ul>
+</nav>
+
+<br />
 
 @{
     var anuncio = Model.Anuncio;
 
-    <table class="table table-striped">
+    <div class="container">
+        <h2>Anúncio</h2>
+        <p>Detalhes do anúncio:</p>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Índice</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Data da Publicação</th>
+                    <th>Categoria</th>
+                </tr>
+            </thead>
 
-        <thead>
-            <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Valor</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>@anuncio.Nome</td>
-                <td>@anuncio.Descricao</td>
-                <td>@anuncio.Valor</td>
-            </tr>
-        </tbody>
-
-    </table>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>@anuncio.Nome</td>
+                    <td>@anuncio.Descricao</td>
+                    <td>@anuncio.Valor</td>
+                    <td>@anuncio.DataPublicacao</td>
+                    <td>A FAZER</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 }
 
-
-<h2>DETALHES DA OFERTA</h2>
+<br />
 
 @{
     var oferta = Model.Oferta;
 
-    <table class="table table-striped">
+    <div class="container">
+        <h2>Oferta</h2>
+        <p>Detalhes da oferta:</p>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Índice</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Data da Oferta</th>
+                    <th>Data da Atualização</th>
+                </tr>
+            </thead>
 
-        <thead>
-            <tr>
-                <th scope="col">Descrição</th>
-                <th scope="col">Valor</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>@oferta.Descricao</td>
-                <td>@oferta.Valor</td>
-            </tr>
-        </tbody>
-
-    </table>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>@oferta.Descricao</td>
+                    <td>@oferta.Valor</td>
+                    <td>@oferta.DataOferta</td>
+                    <td>@oferta.DataAtualizacao</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 }
 
-@if (Model.Modo == "ANUNCIANTE")
-{
-    <h2>DETALHES DO ANUNCIANTE</h2>
-}
-else
-{
-    <h2>DETALHES DO OFERTANTE</h2>
-}
 
 @{
     var usuario = Model.Usuario;
 
-    <table class="table table-striped">
+    <div class="container">
+        @if (Model.Modo == "ANUNCIANTE")
+        {
+            <h2>Anunciante</h2>
+            <p>Detalhes do anunciante a ser avaliado:</p>
+        }
+        else
+        {
+            <h2>Ofertante</h2>
+            <p>Detalhes do ofertante a ser avaliado:</p>
+        }
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Índice</th>
+                    <th>Login</th>
+                    <th>Pontuação</th>
+                </tr>
+            </thead>
 
-        <thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>@usuario.Login</td>
+                    <td>@usuario.Pontuacao</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+@using (Html.BeginForm("Avaliar", "Avaliacao", FormMethod.Post))
+{
+    <h2>Avaliação</h2>
+    <table class="table">
+        <thead class="thead-dark">
             <tr>
-                <th scope="col">Login</th>
-                <th scope="col">Pontuação</th>
+                <th>Positivo</th>
+                <th>Neutro</th>
+                <th>Negativo</th>
             </tr>
         </thead>
 
         <tbody>
             <tr>
-                <td>@usuario.Login</td>
-                <td>@usuario.Pontuacao</td>
+                <td>&#128515 @Html.RadioButton("Pontos", "Positivo")</td>
+                <td>&#128528 @Html.RadioButton("Pontos", "Neutro")</td>
+                <td>&#128544 @Html.RadioButton("Pontos", "Negativo")</td>
             </tr>
         </tbody>
-
     </table>
-}
-
-@using (Html.BeginForm("Avaliar", "Avaliacao", FormMethod.Post))
-{
-    <div class="col-md-10">
-        Positivo:   @Html.RadioButton("Pontos", "Positivo")<br />
-        Neutro: @Html.RadioButton("Pontos", "Neutro")<br />
-        Negativo: @Html.RadioButton("Pontos", "Negativo")
-    </div>
-
-    <div class="d-flex py-2">
-        <div class="col-md-10">
-            <input type="submit" value="Avaliar" class="btn btn-success form-control px-5" />
+    <div class="container">
+        <div class="d-flex py-2">
+            <div class="col-md-10">
+                <input type="submit" value="Avaliar" class="btn btn-success form-control px-5" />
+            </div>
         </div>
+        @Html.HiddenFor(model => model.Usuario.Id)
     </div>
-
-    @Html.HiddenFor(model => model.Usuario.Id)
 }

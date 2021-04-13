@@ -1,63 +1,83 @@
 ﻿@model AppBarganhaWEB.ViewsObject.OfertasOfertantesVO
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Valor</th>
-            <th scope="col">Data de Oferta</th>
-            <th scope="col">Ação</th>
-            <th scope="col">Situação</th>
-        </tr>
-    </thead>
-    @{
-        int count = 1;
-        @foreach (var oferta in Model.Ofertas)
-        {
-            <tbody>
-                <tr>
-                    <th scope="row">@count</th>
-                    <td>@oferta.Descricao</td>
-                    <td>@oferta.Valor</td>
-                    <td>@oferta.DataOferta</td>
-                    <td>@oferta.Status</td>
-                    @if (oferta.Status == OfertaStatus.ACEITO)
-                    {
-                        @if (oferta.OfertanteAvaliado == false)
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand">
+        <img src="~/img/5by5.png" alt="logo" style="width:40px;">
+    </a>
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Home", "Index", "Home")</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Sair", "LogOut", "Login")</a>
+        </li>
+    </ul>
+</nav>
+
+<br />
+<div class="container">
+    <h2>Suas Ofertas</h2>
+    <p>Lista de ofertas feitas pelo usuário atualmente logado:</p>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Índice</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Data da Oferta</th>
+                <th>Ação</th>
+                <th>Situação</th>
+            </tr>
+        </thead>
+        @{
+            int count = 1;
+            @foreach (var oferta in Model.Ofertas)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@count</th>
+                        <td>@oferta.Descricao</td>
+                        <td>@oferta.Valor</td>
+                        <td>@oferta.DataOferta</td>
+                        <td>@oferta.Status</td>
+                        @if (oferta.Status == OfertaStatus.ACEITO)
+                        {
+                            @if (oferta.OfertanteAvaliado == false)
+                            {
+                                <td>
+                                    <div class="d-flex py-2">
+                                        <div class="col-md-10">
+                                            @Html.ActionLink("Avaliar", "Index", "Avaliacao", new { idOferta = oferta.Id, modo = "ANUNCIANTE" }, null)
+                                        </div>
+                                    </div>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>ENCERRADO</td>
+                            }
+
+                        }
+                        else if (oferta.Status == OfertaStatus.RECUSADO)
                         {
                             <td>
                                 <div class="d-flex py-2">
                                     <div class="col-md-10">
-                                        @Html.ActionLink("Avaliar", "Index", "Avaliacao", new { idOferta = oferta.Id, modo = "ANUNCIANTE" }, null)
+                                        @Html.ActionLink("Ofertar", "Index", "Oferta", new { idAnuncio = oferta.IdAnuncio }, null)
                                     </div>
                                 </div>
                             </td>
                         }
                         else
                         {
-                            <td>ENCERRADO</td>
+                            <td>AGUARDANDO</td>
                         }
 
-                    }
-                    else if (oferta.Status == OfertaStatus.RECUSADO)
-                    {
-                        <td>
-                            <div class="d-flex py-2">
-                                <div class="col-md-10">
-                                    @Html.ActionLink("Ofertar", "Index", "Oferta", new { idAnuncio = oferta.IdAnuncio }, null)
-                                </div>
-                            </div>
-                        </td>
-                    }
-                    else
-                    {
-                        <td>Aguardando</td>
-                    }
-
-                </tr>
-            </tbody>
-            count++;
+                    </tr>
+                </tbody>
+                count++;
+            }
         }
-    }
-</table>
+    </table>
+</div>

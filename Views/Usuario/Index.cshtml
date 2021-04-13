@@ -2,6 +2,18 @@
 
 <script src="~/js/site.js"></script>
 
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand">
+        <img src="~/img/5by5.png" alt="logo" style="width:40px;">
+    </a>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Voltar", "Index", "Home")</a>
+        </li>
+    </ul>
+</nav>
+<br />
+
 @using (Html.BeginForm("CadastrarOuAtualizar", "Usuario", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -69,11 +81,17 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="foto">
-                    @Html.LabelFor(model => model.Foto, "Fotos", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.Foto, new { type = "file" })
-                    </div>
+                @*<div class="form-group" id="foto">
+                        @Html.LabelFor(model => model.Foto, "Fotos", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Foto, new { type = "file" })
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    <label asp-for="Foto" class="control-label"></label>
+                    <input asp-for="Foto" accept="img/*" />
+                    <span asp-validation-for="Foto" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
@@ -120,9 +138,8 @@
 
                 <div class="d-flex py-2">
                     <div class="col-md-10">
-                        <input type="submit" id="cadastrarUsuario" value="@( Model.id != null ? "Atualizar" : "Cadastrar" )" class="btn btn-success form-control px-5" />
+                        <input type="submit" id="cadastrarUsuario" value="@( Model.id != null ? "Atualizar" : "Cadastrar" )" class="btn btn-success form-control px-5" enctype="multipart/form-data" />
                     </div>
-
                 </div>
 
                 @Html.HiddenFor(m => m.id)
