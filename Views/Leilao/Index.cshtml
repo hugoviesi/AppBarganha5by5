@@ -35,6 +35,8 @@
         @{
             int count = 1;
 
+            string nameModal = "Modal";
+
             @foreach (var anuncio in Model.Anuncios)
             {
                 <tbody>
@@ -45,7 +47,20 @@
                         <td>@anuncio.DataPublicacao</td>
                         <td>@anuncio.Valor</td>
                         <td>A FAZER</td>
-                        <td>@anuncio.FileName</td>
+                        <td>
+                            <div class="container">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@nameModal@count">Imagem</button>
+                                <div class="modal" id="@nameModal@count">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <img src="~/img/@anuncio.Foto" width="250" height="250" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                         <td>
                             <div class="d-flex py-2">
                                 <div class="col-md-10">

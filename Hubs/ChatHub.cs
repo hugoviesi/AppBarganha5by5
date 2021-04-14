@@ -9,6 +9,5 @@ namespace AppBarganhaWEB.Hubs
         {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
-
     }
 }

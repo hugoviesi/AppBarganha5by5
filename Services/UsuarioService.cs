@@ -2,7 +2,10 @@
 using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Utils;
 using AppBarganhaWEB.ViewsObject;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using System;
+using System.IO;
 
 namespace AppBarganhaWEB.Services
 {
@@ -10,11 +13,13 @@ namespace AppBarganhaWEB.Services
     {
         private readonly PessoaFisicaService _pessoaFisicaService;
         private readonly PessoaJuridicaService _pessoaJuridicaService;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public UsuarioService(PessoaFisicaService pessoaFisicaService, PessoaJuridicaService pessoaJuridicaService)
+        public UsuarioService(PessoaFisicaService pessoaFisicaService, PessoaJuridicaService pessoaJuridicaService, IWebHostEnvironment hostEnviroment)
         {
             _pessoaFisicaService = pessoaFisicaService;
             _pessoaJuridicaService = pessoaJuridicaService;
+            _hostEnvironment = hostEnviroment;
         }
 
         public Usuario Get(string id)
@@ -123,7 +128,7 @@ namespace AppBarganhaWEB.Services
                     throw new Exception("Documento já cadastrado");
                 }
 
-                if(ExisteLogin(usuarioVO.Login))
+                if (ExisteLogin(usuarioVO.Login))
                 {
                     throw new Exception("Login já cadastrado");
                 }
@@ -135,6 +140,8 @@ namespace AppBarganhaWEB.Services
                     NomeFantasia = usuarioVO.NomeFantasia,
                     Cnpj = usuarioVO.Documento,
                     Endereco = usuarioVO.Endereco,
+                    Foto = UploadFoto(usuarioVO.ArquivoFoto),
+                    FotoDocumento = UploadDocumento(usuarioVO.Documentos),
                     Login = usuarioVO.Login,
                     Senha = Senha.GeraHash(usuarioVO.Senha),
                     Interesses = usuarioVO.GetInteresses(usuarioVO.InteressesSelecionados)
@@ -180,6 +187,7 @@ namespace AppBarganhaWEB.Services
                     Nome = usuarioVO.Nome,
                     Cpf = usuarioVO.Documento,
                     Endereco = usuarioVO.Endereco,
+                    Foto = UploadFoto(usuarioVO.ArquivoFoto),
                     Login = usuarioVO.Login,
                     Senha = Senha.GeraHash(usuarioVO.Senha),
                     Interesses = usuarioVO.GetInteresses(usuarioVO.InteressesSelecionados)
@@ -230,6 +238,34 @@ namespace AppBarganhaWEB.Services
                 return true;
             }
             return false;
+        }
+
+        private string UploadFoto(IFormFile arquivoFoto)
+        {
+            string wwwwRootPath = _hostEnvironment.WebRootPath;
+            string fileName = Path.GetFileNameWithoutExtension(arquivoFoto.FileName);
+            string extension = Path.GetExtension(arquivoFoto.FileName);
+            var foto = fileName + DateTime.Now.ToString("yymmssffff") + extension;
+            string path = Path.Combine(wwwwRootPath + "/img/", foto);
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                arquivoFoto.CopyToAsync(fileStream);
+            }
+            return foto;
+        }
+
+        private string UploadDocumento(IFormFile arquivoDocumento)
+        {
+            string wwwwRootPath = _hostEnvironment.WebRootPath;
+            string fileName = Path.GetFileNameWithoutExtension(arquivoDocumento.FileName);
+            string extension = Path.GetExtension(arquivoDocumento.FileName);
+            var documento = fileName + DateTime.Now.ToString("yymmssffff") + extension;
+            string path = Path.Combine(wwwwRootPath + "/documentos/", documento);
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                arquivoDocumento.CopyToAsync(fileStream);
+            }
+            return documento;
         }
     }
 }

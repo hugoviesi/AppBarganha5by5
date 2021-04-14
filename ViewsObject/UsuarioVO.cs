@@ -1,6 +1,7 @@
 ﻿using AppBarganhaWEB.Models;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppBarganhaWEB.ViewsObject
 {
@@ -17,8 +18,10 @@ namespace AppBarganhaWEB.ViewsObject
         public string RazaoSocial { get; set; }
         public string NomeFantasia { get; set; }
         public IFormFile Documentos { get; set; }
-        public IFormFile Foto { get; set; }
-        public string CaminhoFoto { get; set; }
+
+        [NotMapped]
+        public IFormFile ArquivoFoto { get; set; }
+        public string Foto { get; set; }
         public List<Categoria> GetInteresses(List<int> selecionados)
         {
             var interesses = new List<Categoria>();

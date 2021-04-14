@@ -1,6 +1,7 @@
 ﻿using AppBarganhaWEB.Models;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppBarganhaWEB.ViewsObject
 {
@@ -11,6 +12,10 @@ namespace AppBarganhaWEB.ViewsObject
         public decimal Valor { get; set; }
         public string Nome { get; set; }
         public List<int> InteressesSelecionados { get; set; }
+
+        [NotMapped]
+        public IFormFile ArquivoFoto { get; set; }
+        public string Foto { get; set; }
 
         public List<Categoria> GetCategorias()
         {

@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppBarganhaWEB.Models
 {
@@ -26,8 +27,9 @@ namespace AppBarganhaWEB.Models
 
         public List<Categoria> Interesses { get; set; }
 
-        public IFormFile Foto { get; set; }
+        [NotMapped]
+        public IFormFile ArquivoFoto { get; set; }
 
-        public string CaminhoFoto { get; set; }
+        public string Foto { get; set; }
     }
 }

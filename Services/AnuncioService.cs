@@ -23,8 +23,8 @@ namespace AppBarganhaWEB.Services
         public Anuncio Get(string id) =>
             _anuncios.Find<Anuncio>(anuncio => anuncio.Id == id).FirstOrDefault();
 
-        public List<Anuncio> GetForUser(string userId) =>
-            _anuncios.Find<Anuncio>(anuncio => anuncio.IdUsuario == userId).ToList();
+        public List<Anuncio> GetForUser(string usuarioId) =>
+            _anuncios.Find<Anuncio>(anuncio => anuncio.IdUsuario == usuarioId).ToList();
 
         public Anuncio Create(Anuncio anuncio)
         {

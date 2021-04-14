@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppBarganhaWEB.Models
 
@@ -9,9 +11,13 @@ namespace AppBarganhaWEB.Models
         public string RazaoSocial { get; set; }
 
         public string NomeFantasia { get; set; }
+        
         [Required]
         public string Cnpj { get; set; }
 
-        //public string Documentos { get; seSt; } ou foto?
+        public string FotoDocumento { get; set; }
+
+        [NotMapped]
+        public IFormFile ArquivoDocumento { get; set; }
     }
 }

@@ -1,7 +1,9 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.AspNetCore.Http;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppBarganhaWEB.Models
 {
@@ -12,7 +14,6 @@ namespace AppBarganhaWEB.Models
         public string Id { get; set; }
         public string Descricao { get; set; }
         public DateTime DataPublicacao { get; set; }
-        public string FileName { get; set; }
         public decimal Valor { get; set; }
         public string Nome { get; set; }
         public List<Categoria> Categorias { get; set; }
@@ -20,6 +21,9 @@ namespace AppBarganhaWEB.Models
         public string IdUsuario { get; set; }
 
         public StatusAnuncio Status { get; set; }
+        public string Foto { get; set; }
 
+        [NotMapped]
+        public IFormFile ArquivoFoto { get; set; }
     }
 }

@@ -16,56 +16,56 @@
     </ul>
 </nav>
 <br />
-@using (Html.BeginForm("Cadastrar", "Anuncio", FormMethod.Post))
-{
+
 <div class="form-horizontal">
     <h2>Cadastro de Anúncio</h2>
     <p>Preencha o formulário para realizar o seu anuncio:</p>
     <main class="d-flex justify-content-center">
         <div class="">
-            <div class="form-group">
-                @Html.LabelFor(model => model.Nome, "Nome", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Nome, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            <form asp-action="Cadastrar" enctype="multipart/form-data">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nome, "Nome", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Nome, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Descricao, "Descrição", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Descricao, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descricao, "Descrição", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Descricao, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.InteressesSelecionados, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.ListBoxFor(model => model.InteressesSelecionados, ViewBag.Interesses as MultiSelectList)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.InteressesSelecionados, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.ListBoxFor(model => model.InteressesSelecionados, ViewBag.Interesses as MultiSelectList)
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Valor, "Valor", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Valor, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Valor, "Valor", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Valor, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="d-flex py-2">
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.picAnuncio, new { type = "file" })
+                <div class="form-group">
+                    <label asp-for="ArquivoFoto" class="control-label"></label>
+                    <input asp-for="ArquivoFoto" accept="images/.*" />
+                    <span asp-validation-for="ArquivoFoto" class="text-danger"></span>
                 </div>
-            </div>
 
-            <div class="d-flex py-2">
-                <div class="col-md-10">
-                    <input type="submit" id="cadastrarAnuncio" value="Anunciar" class="btn btn-success form-control px-5" />
+                <div class="d-flex py-2">
+                    <div class="col-md-10">
+                        <input type="submit" id="cadastrarAnuncio" value="Anunciar" class="btn btn-success form-control px-5" />
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </main>
 </div>
-}
