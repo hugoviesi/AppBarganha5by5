@@ -9,12 +9,14 @@ namespace AppBarganhaWEB.Services
     public class OfertaService
     {
         private readonly IMongoCollection<Oferta> _oferta;
+        private readonly AnuncioService _anuncioService;
 
-        public OfertaService(IBarganhaDatabaseSettings settings)
+        public OfertaService(IBarganhaDatabaseSettings settings, AnuncioService anuncioService)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
             _oferta = database.GetCollection<Oferta>("Oferta");
+            _anuncioService = anuncioService;
         }
 
         public Oferta Get(string id) =>
@@ -30,6 +32,17 @@ namespace AppBarganhaWEB.Services
         {
             _oferta.InsertOne(oferta);
             return oferta;
+        }
+
+        public bool ConferirValorOferta(Anuncio anuncioIn, decimal valorOferta)
+        {
+            var anuncio = _anuncioService.Get(anuncioIn.Id);
+
+            if ((valorOferta >= anuncio.Valor) && (valorOferta <= anuncio.Valor * (decimal)1.2))
+            {
+                return true;
+            }
+            return false;
         }
 
         public void Update(string id, Oferta ofertaIn) =>

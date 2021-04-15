@@ -49,7 +49,14 @@ namespace AppBarganhaWEB.Controllers
                 Status = OfertaStatus.ABERTO
             };
 
-            _ofertaService.Create(oferta);
+            if (_ofertaService.ConferirValorOferta(anuncio, ofertaVO.Valor))
+            {
+                _ofertaService.Create(oferta);
+            }
+            else
+            {
+                throw new Exception("A oferta precisa ser maior que o valor original e menor que 20% do valor original do anúncio.");
+            }
 
             return (RedirectToAction("Index", "Leilao"));
         }
@@ -80,13 +87,13 @@ namespace AppBarganhaWEB.Controllers
             anuncio.Status = StatusAnuncio.ENCERRADO;
             _anuncioService.Update(anuncio.Id, anuncio);
 
-            return RedirectToAction("Index", "Avaliacao", new { idOferta = ofertaAtual.Id, modo = "OFERTANTE"});
+            return RedirectToAction("Index", "Avaliacao", new { idOferta = ofertaAtual.Id, modo = "OFERTANTE" });
         }
 
         public IActionResult Recusar()
         {
             var idOferta = HttpContext.Request.Query["idOferta"];
-         
+
             var ofertaAtual = _ofertaService.Get(idOferta);
             ofertaAtual.Status = OfertaStatus.RECUSADO;
             ofertaAtual.DataAtualizacao = DateTime.Now;

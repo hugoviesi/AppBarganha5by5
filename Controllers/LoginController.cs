@@ -24,7 +24,7 @@ namespace AppBarganhaWEB.Controllers
         {
             var usuario = _usuarioService.Login(login.Apelido, login.Senha);
 
-            if (usuario != null)
+            if ((usuario != null) && (usuario.Status == true))
             {
                 UsuarioLogadoSessao.Armazenar(HttpContext, usuario);
                 return RedirectToAction("Index", "Home");
@@ -38,6 +38,11 @@ namespace AppBarganhaWEB.Controllers
             HttpContext.Session.Clear();
 
             return RedirectToAction("Index", "Login");
+        }
+
+        public IActionResult SobreNos()
+        {
+            return View();
         }
     }
 }

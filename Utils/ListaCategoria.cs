@@ -12,6 +12,9 @@ namespace AppBarganhaWEB.Utils
         {
             var categorias = Enum.GetValues(typeof(Categoria)).Cast<Categoria>();
 
+            //typeof: verifica o tipo do parâmetro passado
+            //cast: converte um Enum em um tipo específico
+
             List<SelectListItem> selectListItems = new List<SelectListItem>();
 
             foreach (Categoria categoria in categorias)

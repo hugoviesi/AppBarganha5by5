@@ -19,6 +19,7 @@ namespace AppBarganhaWEB.Models
         [Required]
         public string Senha { get; set; }
 
+        public bool Status { get; set; }
         public int QtdAnuncios { get; set; }
         public Endereco Endereco { get; set; }        
         public int Pontuacao { get; set; }

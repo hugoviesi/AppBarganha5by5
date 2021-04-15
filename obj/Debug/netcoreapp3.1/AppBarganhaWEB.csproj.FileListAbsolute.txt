@@ -59,3 +59,4 @@ C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\AppBarganh
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Pacote\Index.cshtml.g.cs
+C:\Users\viesi\source\reposWEB\AppBarganhaWEB\obj\Debug\netcoreapp3.1\Razor\Views\Login\SobreNos.cshtml.g.cs

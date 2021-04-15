@@ -136,6 +136,7 @@ namespace AppBarganhaWEB.Services
                 var pessoaJuridica = new PessoaJuridica
                 {
                     Pontuacao = 0,
+                    Status = true,
                     RazaoSocial = usuarioVO.RazaoSocial,
                     NomeFantasia = usuarioVO.NomeFantasia,
                     Cnpj = usuarioVO.Documento,
@@ -185,6 +186,7 @@ namespace AppBarganhaWEB.Services
                 var pessoaFisica = new PessoaFisica
                 {
                     Pontuacao = 0,
+                    Status = true,
                     Nome = usuarioVO.Nome,
                     Cpf = usuarioVO.Documento,
                     QtdAnuncios = 5,
@@ -267,6 +269,23 @@ namespace AppBarganhaWEB.Services
         private string UploadDocumento(IFormFile arquivoDocumento)
         {
             return Upload.UploadArquivo(_hostEnvironment, arquivoDocumento, "documentos");
+        }
+
+        public Usuario AtualizarStatus(string idUsuario, bool status)
+        {
+            var usuario = Get(idUsuario);
+            usuario.Status = status;
+
+            if (usuario is PessoaFisica)
+            {
+                _pessoaFisicaService.Update(idUsuario, usuario as PessoaFisica);
+            }
+            else
+            {
+                _pessoaJuridicaService.Update(idUsuario, usuario as PessoaJuridica);
+            }
+
+            return usuario;
         }
     }
 }

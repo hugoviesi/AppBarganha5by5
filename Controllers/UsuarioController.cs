@@ -91,5 +91,18 @@ namespace AppBarganhaWEB.Controllers
                 return RedirectToAction("Index", "Login");
             }
         }
+
+        public IActionResult Desativar()
+        {
+            var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
+
+            var usuario = _usuarioService.GetUsuario(usuarioLogado.Id, usuarioLogado.Tipo);
+
+            _usuarioService.AtualizarStatus(usuario.Id, false);
+
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Login");
+        }
     }
 }
