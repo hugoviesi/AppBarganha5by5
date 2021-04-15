@@ -1,0 +1,31 @@
+﻿<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand">
+        <img src="~/img/5by5.png" alt="logo" style="width:40px;">
+    </a>
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Home", "Index", "Home")</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" @Html.ActionLink("Sair", "LogOut", "Login")</a>
+        </li>
+    </ul>
+</nav>
+<br />
+<body>
+    <div class="container">
+        <h2>&#127775 Seja um Barganha Premium &#127775</h2>
+        <p>Você chegou ao limite de anúncios! Garanta mais 3 anúncios assinando o Barganha Premium</p>
+        <div class="card" style="width:400px">
+            <img class="card-img-top" src="~/img/premium.png" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">R$20,00</h4>
+                <p class="card-text">Possui uma validade de 30 dias</p>
+                <a class="btn btn-primary" @Html.ActionLink("Quero!", "PacoteAnuncios", "Pacote")</a>
+            </div>
+        </div>
+        <br>
+    </div>
+
+</body>

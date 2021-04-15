@@ -46,9 +46,14 @@ namespace AppBarganhaWEB.Services
             return _anuncios.Find<Anuncio>(
                 anuncio => anuncio.Categorias.Any(c => categorias.Contains(c)) 
                 && anuncio.IdUsuario != idUsuarioLogado
-                && anuncio.Status == StatusAnuncio.ABERTO
-            ).ToList();
+                && anuncio.Status == StatusAnuncio.ABERTO).ToList();
         }
+
+        public long QtdAnunciosUsuario(string idUsuario)
+        {
+            return _anuncios.CountDocuments(anuncio => anuncio.IdUsuario == idUsuario);
+        }
+
 
     }
 }

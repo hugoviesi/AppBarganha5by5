@@ -42,6 +42,7 @@ namespace AppBarganhaWEB.Services
         }
 
 
+
         public Usuario GetUsuario(string id, TipoUsuario tipoUsuario)
         {
             if (tipoUsuario == TipoUsuario.FISICA)
@@ -104,7 +105,6 @@ namespace AppBarganhaWEB.Services
 
             if (ehAtualizar)
             {
-
                 var usuarioAtual = _pessoaJuridicaService.Get(usuarioVO.id);
                 usuarioAtual.RazaoSocial = usuarioVO.RazaoSocial;
                 usuarioAtual.NomeFantasia = usuarioVO.NomeFantasia;
@@ -142,6 +142,7 @@ namespace AppBarganhaWEB.Services
                     Endereco = usuarioVO.Endereco,
                     Foto = UploadFoto(usuarioVO.ArquivoFoto),
                     FotoDocumento = UploadDocumento(usuarioVO.Documentos),
+                    QtdAnuncios = 2,
                     Login = usuarioVO.Login,
                     Senha = Senha.GeraHash(usuarioVO.Senha),
                     Interesses = usuarioVO.GetInteresses(usuarioVO.InteressesSelecionados)
@@ -186,6 +187,7 @@ namespace AppBarganhaWEB.Services
                     Pontuacao = 0,
                     Nome = usuarioVO.Nome,
                     Cpf = usuarioVO.Documento,
+                    QtdAnuncios = 5,
                     Endereco = usuarioVO.Endereco,
                     Foto = UploadFoto(usuarioVO.ArquivoFoto),
                     Login = usuarioVO.Login,
@@ -201,6 +203,23 @@ namespace AppBarganhaWEB.Services
         {
             var usuario = Get(idUsuario);
             usuario.Pontuacao += pontos;
+
+            if (usuario is PessoaFisica)
+            {
+                _pessoaFisicaService.Update(idUsuario, usuario as PessoaFisica);
+            }
+            else
+            {
+                _pessoaJuridicaService.Update(idUsuario, usuario as PessoaJuridica);
+            }
+
+            return usuario;
+        }
+
+        public Usuario AtualizarQtdAnuncio(string idUsuario, int qtdAnuncio)
+        {
+            var usuario = Get(idUsuario);
+            usuario.QtdAnuncios += qtdAnuncio;
 
             if (usuario is PessoaFisica)
             {
@@ -242,30 +261,12 @@ namespace AppBarganhaWEB.Services
 
         private string UploadFoto(IFormFile arquivoFoto)
         {
-            string wwwwRootPath = _hostEnvironment.WebRootPath;
-            string fileName = Path.GetFileNameWithoutExtension(arquivoFoto.FileName);
-            string extension = Path.GetExtension(arquivoFoto.FileName);
-            var foto = fileName + DateTime.Now.ToString("yymmssffff") + extension;
-            string path = Path.Combine(wwwwRootPath + "/img/", foto);
-            using (var fileStream = new FileStream(path, FileMode.Create))
-            {
-                arquivoFoto.CopyToAsync(fileStream);
-            }
-            return foto;
+            return Upload.UploadArquivo(_hostEnvironment, arquivoFoto, "img");
         }
 
         private string UploadDocumento(IFormFile arquivoDocumento)
         {
-            string wwwwRootPath = _hostEnvironment.WebRootPath;
-            string fileName = Path.GetFileNameWithoutExtension(arquivoDocumento.FileName);
-            string extension = Path.GetExtension(arquivoDocumento.FileName);
-            var documento = fileName + DateTime.Now.ToString("yymmssffff") + extension;
-            string path = Path.Combine(wwwwRootPath + "/documentos/", documento);
-            using (var fileStream = new FileStream(path, FileMode.Create))
-            {
-                arquivoDocumento.CopyToAsync(fileStream);
-            }
-            return documento;
+            return Upload.UploadArquivo(_hostEnvironment, arquivoDocumento, "documentos");
         }
     }
 }

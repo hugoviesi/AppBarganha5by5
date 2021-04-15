@@ -18,18 +18,12 @@ namespace AppBarganhaWEB.Models
         
         [Required]
         public string Senha { get; set; }
-        
-        public Endereco Endereco { get; set; }    
-        
+
+        public int QtdAnuncios { get; set; }
+        public Endereco Endereco { get; set; }        
         public int Pontuacao { get; set; }
-
-        public bool Vip { get; set; }
-
         public List<Categoria> Interesses { get; set; }
-
-        [NotMapped]
         public IFormFile ArquivoFoto { get; set; }
-
         public string Foto { get; set; }
     }
 }

@@ -13,23 +13,35 @@ namespace AppBarganhaWEB.Controllers
     public class AnuncioController : Controller
     {
         private readonly AnuncioService _anuncioService;
+        private readonly UsuarioService _usuarioService;
         private readonly IWebHostEnvironment _hostEnvironment;
 
-        public AnuncioController(AnuncioService anuncioService, IWebHostEnvironment hostEnvironment)
+        public AnuncioController(AnuncioService anuncioService, IWebHostEnvironment hostEnvironment, UsuarioService usuarioService)
         {
             _anuncioService = anuncioService;
             _hostEnvironment = hostEnvironment;
+            _usuarioService = usuarioService;
         }
 
         public IActionResult Index()
         {
             ViewBag.Interesses = ListaCategoria.Lista();
 
+            var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
+
+            var usuario = _usuarioService.Get(usuarioLogado.Id);
+
+            if (_anuncioService.QtdAnunciosUsuario(usuarioLogado.Id) >= usuario.QtdAnuncios)
+            {
+                return RedirectToAction("Index", "Pacote");
+            }
+
             return View();
         }
 
         public IActionResult Cadastrar(AnuncioVO anuncioVO, IFormFile pic)
         {
+
             var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
 
             var anuncio = new Anuncio
@@ -51,16 +63,7 @@ namespace AppBarganhaWEB.Controllers
 
         private string UploadFoto(IFormFile arquivoFoto)
         {
-            string wwwwRootPath = _hostEnvironment.WebRootPath;
-            string fileName = Path.GetFileNameWithoutExtension(arquivoFoto.FileName);
-            string extension = Path.GetExtension(arquivoFoto.FileName);
-            var foto = fileName + DateTime.Now.ToString("yymmssffff") + extension;
-            string path = Path.Combine(wwwwRootPath + "/img/", foto);
-            using (var fileStream = new FileStream(path, FileMode.Create))
-            {
-                arquivoFoto.CopyToAsync(fileStream);
-            }
-            return foto;
+            return Upload.UploadArquivo(_hostEnvironment, arquivoFoto, "img");
         }
     }
 }
