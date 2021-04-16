@@ -1,5 +1,7 @@
 ﻿@model AppBarganhaWEB.ViewsObject.HomeVO
 
+<script src="~/js/site.js"></script>
+
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand">
@@ -20,9 +22,6 @@
                 <a class="nav-link" @Html.ActionLink("Perfil", "Perfil", "Usuario")</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" @Html.ActionLink("Chat", "Chat", "Home")</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" @Html.ActionLink("Desativar Conta", "Desativar", "Usuario")</a>
             </li>
             <li class="nav-item">
@@ -33,7 +32,8 @@
 
     <h1 style="text-align:center">&#128513 Seja bem-vindo, @Model.UsuarioLogado.Login &#128513</h1>
     <h2 style="text-align:center">Pontuação: @Model.UsuarioLogado.Pontuacao &#11088</h2>
-
+    <h3 style="text-align:center">Novos anúncios: <span style="font-size:20px" id="noti"></span></h3>
+    
     <div class="container">
         <h2>Seus Anuncios</h2>
         <p>Lista de anúncios feitos pelo usuário atualmente logado:</p>
@@ -44,6 +44,7 @@
                     <th>Nome</th>
                     <th>Descrição</th>
                     <th>Data de Publicação</th>
+                    <th>Data de Encerramento</th>
                     <th>Valor</th>
                     <th>Categorias</th>
                     <th>Foto</th>
@@ -64,10 +65,11 @@
                             <th scope="row">@count</th>
                             <td>@anuncio.Nome</td>
                             <td>@anuncio.Descricao</td>
-                            <td>@anuncio.DataPublicacao</td>
+                            <td>@anuncio.DataPublicacao.ToString("g")</td>
+                            <td>@anuncio.DataFinal.ToString("g")</td>
                             <td>@anuncio.Valor</td>
                             <td>A FAZER</td>
-                            <td>                
+                            <td>
                                 <div class="container">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@nameModal@count">Imagem</button>
                                     <div class="modal" id="@nameModal@count">
@@ -79,7 +81,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>0
                             </td>
                             <td>
                                 <div class="d-flex py-2">

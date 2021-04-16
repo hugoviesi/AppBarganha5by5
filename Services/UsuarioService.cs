@@ -5,7 +5,9 @@ using AppBarganhaWEB.ViewsObject;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace AppBarganhaWEB.Services
 {
@@ -21,6 +23,23 @@ namespace AppBarganhaWEB.Services
             _pessoaJuridicaService = pessoaJuridicaService;
             _hostEnvironment = hostEnviroment;
         }
+
+        public List<Usuario> GetByInteresses(List<Categoria> interesses, string idUsuarioLogado)
+        {
+            var usuarios = new List<Usuario>();
+
+            foreach (var categoria in interesses)
+            {
+                var pessoasFisicas = _pessoaFisicaService.Get().Where(x => x.Id != idUsuarioLogado && x.Interesses.Contains(categoria));
+                var pessoasJuridicas = _pessoaJuridicaService.Get().Where(x => x.Id != idUsuarioLogado && x.Interesses.Contains(categoria));
+
+                usuarios.AddRange(pessoasFisicas);
+                usuarios.AddRange(pessoasJuridicas);
+            }
+
+            return usuarios;
+        }
+
 
         public Usuario Get(string id)
         {
@@ -40,7 +59,6 @@ namespace AppBarganhaWEB.Services
 
             return null;
         }
-
 
 
         public Usuario GetUsuario(string id, TipoUsuario tipoUsuario)
@@ -76,7 +94,7 @@ namespace AppBarganhaWEB.Services
             return null;
         }
 
-        public Usuario CriarOrAtualizar(UsuarioVO usuarioVO)
+        public Usuario CriarOuAtualizar(UsuarioVO usuarioVO)
         {
             if (!Documento.EhValido(usuarioVO.Documento))
             {
@@ -142,7 +160,7 @@ namespace AppBarganhaWEB.Services
                     Cnpj = usuarioVO.Documento,
                     Endereco = usuarioVO.Endereco,
                     Foto = UploadFoto(usuarioVO.ArquivoFoto),
-                    FotoDocumento = UploadDocumento(usuarioVO.Documentos),
+                    FotoDocumento = UploadDocumento(usuarioVO.ArquivoDocumentos),
                     QtdAnuncios = 2,
                     Login = usuarioVO.Login,
                     Senha = Senha.GeraHash(usuarioVO.Senha),
@@ -213,6 +231,37 @@ namespace AppBarganhaWEB.Services
             else
             {
                 _pessoaJuridicaService.Update(idUsuario, usuario as PessoaJuridica);
+            }
+
+            return usuario;
+        }
+
+        public Usuario ZerarNotificacoes(Usuario usuario)
+        {
+            usuario.Notificacao = 0;
+
+            if (usuario is PessoaFisica)
+            {
+                _pessoaFisicaService.Update(usuario.Id, usuario as PessoaFisica);
+            }
+            else
+            {
+                _pessoaJuridicaService.Update(usuario.Id, usuario as PessoaJuridica);
+            }
+
+            return usuario;
+        }
+        public Usuario AtualizarNotificacoes(Usuario usuario)
+        {
+            usuario.Notificacao += 1;
+
+            if (usuario is PessoaFisica)
+            {
+                _pessoaFisicaService.Update(usuario.Id, usuario as PessoaFisica);
+            }
+            else
+            {
+                _pessoaJuridicaService.Update(usuario.Id, usuario as PessoaJuridica);
             }
 
             return usuario;

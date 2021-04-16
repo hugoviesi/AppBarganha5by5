@@ -1,6 +1,7 @@
 ﻿using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Utils;
 using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -53,7 +54,5 @@ namespace AppBarganhaWEB.Services
         {
             return _anuncios.CountDocuments(anuncio => anuncio.IdUsuario == idUsuario);
         }
-
-
     }
 }

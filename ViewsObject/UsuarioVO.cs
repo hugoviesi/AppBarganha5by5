@@ -18,8 +18,8 @@ namespace AppBarganhaWEB.ViewsObject
         public string Documento { get; set; }
         public string RazaoSocial { get; set; }
         public string NomeFantasia { get; set; }
-        public IFormFile Documentos { get; set; }
-
+        public IFormFile ArquivoDocumentos { get; set; }
+        public string FotoDocumento { get; set; }
         [NotMapped]
         public IFormFile ArquivoFoto { get; set; }
         public string Foto { get; set; }

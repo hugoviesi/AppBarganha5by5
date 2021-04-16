@@ -33,7 +33,8 @@
                     <th>Nome</th>
                     <th>Descrição</th>
                     <th>Valor</th>
-                    <th>Data da Publicação</th>
+                    <th>Data de Publicação</th>
+                    <th>Data de Encerramento</th>
                     <th>Foto</th>
                     <th>Categoria</th>
                 </tr>
@@ -45,7 +46,8 @@
                     <td>@anuncio.Nome</td>
                     <td>@anuncio.Descricao</td>
                     <td>@anuncio.Valor</td>
-                    <td>@anuncio.DataPublicacao</td>
+                    <td>@anuncio.DataPublicacao.ToString("g")</td>
+                    <td>@anuncio.DataFinal.ToString("g")</td>
                     <td>
                         <div class="container">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAnuncioSS">Imagem</button>
@@ -91,8 +93,8 @@
                     <td>1</td>
                     <td>@oferta.Descricao</td>
                     <td>@oferta.Valor</td>
-                    <td>@oferta.DataOferta</td>
-                    <td>@oferta.DataAtualizacao</td>
+                    <td>@oferta.DataOferta.ToString("g")</td>
+                    <td>@oferta.DataAtualizacao.ToString("g")</td>
                 </tr>
             </tbody>
         </table>

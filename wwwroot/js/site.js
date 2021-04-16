@@ -21,7 +21,6 @@
             exibeCamposFormularioUsuarioPorTipo(tipoUsuarioSelecionado)
             exibePerfilPorUsuario(tipoUsuarioSelecionado)
         })
-
     }
 
     function mostraFormularioUsuarioPadrao() {
@@ -65,7 +64,6 @@
         }
     }
 
-
     function validaDocumento() {
 
         $('#documento input').on("blur", function (event) {
@@ -78,6 +76,16 @@
             })
         })
     }
+
+    function atualizarNotificacao() {
+        $.get("/Home/Notificacao", function (data) {
+            $("#noti").html(data);
+        });
+    }
+
+    $(document).ready(function () {
+        setInterval(atualizarNotificacao, 250);
+    });
 
     preencheEndereco()
     trataTipoDeFormularioPorPessoa()

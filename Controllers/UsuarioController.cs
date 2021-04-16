@@ -80,7 +80,7 @@ namespace AppBarganhaWEB.Controllers
 
         public IActionResult CadastrarOuAtualizar(UsuarioVO usuarioVO)
         {
-            var usuario = _usuarioService.CriarOrAtualizar(usuarioVO);
+            var usuario = _usuarioService.CriarOuAtualizar(usuarioVO);
 
             if(usuarioVO.id != null)
             {

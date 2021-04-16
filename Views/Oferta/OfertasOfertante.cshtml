@@ -28,6 +28,7 @@
                 <th>Data da Oferta</th>
                 <th>Ação</th>
                 <th>Situação</th>
+                <th>Chat</th>
             </tr>
         </thead>
         @{
@@ -39,7 +40,7 @@
                         <th scope="row">@count</th>
                         <td>@oferta.Descricao</td>
                         <td>@oferta.Valor</td>
-                        <td>@oferta.DataOferta</td>
+                        <td>@oferta.DataOferta.ToString("g")</td>
                         <td>@oferta.Status</td>
                         @if (oferta.Status == OfertaStatus.ACEITO)
                         {
@@ -73,7 +74,9 @@
                         {
                             <td>AGUARDANDO</td>
                         }
-
+                        <td>
+                            @Html.ActionLink("Chat", "Index", "Chat", new { idOferta = oferta.Id })
+                        </td>
                     </tr>
                 </tbody>
                 count++;

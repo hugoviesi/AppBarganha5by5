@@ -14,15 +14,22 @@ connection.on("ReceiveMessage", function (user, message) {
 });
 
 connection.start().then(function () {
-    document.getElementById("sendButton").disabled = false;
+    var chatId = document.getElementById("chatId").value;
+    connection.invoke('Register', chatId)
+        .then(function (connectionId) {
+            console.log("user in chat" + connectionId)
+            document.getElementById("sendButton").disabled = false;
+        }).catch(err => console.error(err.toString()));;
+
 }).catch(function (err) {
     return console.error(err.toString());
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
-    var user = document.getElementById("userInput").value;
+    var chatId = document.getElementById("chatId").value;
+    var userName = document.getElementById("userName").value;
     var message = document.getElementById("messageInput").value;
-    connection.invoke("SendMessage", user, message).catch(function (err) {
+    connection.invoke("SendMessage", chatId, userName, message).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();

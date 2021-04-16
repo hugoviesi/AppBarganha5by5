@@ -30,6 +30,7 @@
                     <th>Nome</th>
                     <th>Descrição</th>
                     <th>Data de Publicação</th>
+                    <th>Data de Encerramento</th>
                     <th>Valor</th>
                     <th>Categorias</th>
                     <th>Foto</th>
@@ -42,7 +43,8 @@
                     <th scope="row">1</th>
                     <td>@anuncio.Nome</td>
                     <td>@anuncio.Descricao</td>
-                    <td>@anuncio.DataPublicacao</td>
+                    <td>@anuncio.DataPublicacao.ToString("g")</td>
+                    <td>@anuncio.DataFinal.ToString("g")</td>
                     <td>@anuncio.Valor</td>
                     <td>A FAZER</td>
                     <td>

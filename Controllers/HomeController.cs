@@ -9,6 +9,7 @@ namespace AppBarganhaWEB.Controllers
     {
         private readonly UsuarioService _usuarioService;
         private readonly AnuncioService _anuncioService;
+        
 
         public HomeController(AnuncioService anuncioService, UsuarioService usuarioService)
         {
@@ -28,10 +29,13 @@ namespace AppBarganhaWEB.Controllers
 
             return View(homeVO);
         }
-
-        public IActionResult Chat()
+        public PartialViewResult Notificacao()
         {
-            return View();
+            var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
+
+            var usuario = _usuarioService.Get(usuarioLogado.Id);
+
+            return PartialView(usuario);
         }
     }
 }

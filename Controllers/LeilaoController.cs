@@ -22,6 +22,8 @@ namespace AppBarganhaWEB.Controllers
 
             var usuario = _usuarioService.GetUsuario(usuarioLogado.Id, usuarioLogado.Tipo);
 
+            _usuarioService.ZerarNotificacoes(usuario);
+
             var leilaoVO = new LeilaoVO
             {
                 Anuncios = _anuncioService.GetPorCategoriaEmAberto(usuario.Interesses, usuarioLogado.Id)
