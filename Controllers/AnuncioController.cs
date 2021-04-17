@@ -8,6 +8,7 @@ using System;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using System.Collections.Generic;
+using AppBarganhaWEB.Exceptions;
 
 namespace AppBarganhaWEB.Controllers
 {
@@ -42,26 +43,35 @@ namespace AppBarganhaWEB.Controllers
 
         public IActionResult Cadastrar(AnuncioVO anuncioVO, IFormFile pic)
         {
-            var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
-
-            var anuncio = new Anuncio
+            try
             {
-                Nome = anuncioVO.Nome,
-                Descricao = anuncioVO.Descricao,
-                Categorias = anuncioVO.GetCategorias(),
-                Valor = anuncioVO.Valor,
-                Foto = UploadFoto(anuncioVO.ArquivoFoto),
-                DataPublicacao = DateTime.Now,
-                DataFinal = DateTime.Now.AddDays(30),
-                IdUsuario = usuarioLogado.Id,
-                Status = StatusAnuncio.ABERTO
-            };
+                var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
+
+                var anuncio = new Anuncio
+                {
+                    Nome = anuncioVO.Nome,
+                    Descricao = anuncioVO.Descricao,
+                    Categorias = anuncioVO.GetCategorias(),
+                    Valor = anuncioVO.Valor,
+                    Foto = UploadFoto(anuncioVO.ArquivoFoto),
+                    DataPublicacao = DateTime.Now,
+                    DataFinal = DateTime.Now.AddDays(30),
+                    IdUsuario = usuarioLogado.Id,
+                    Status = StatusAnuncio.ABERTO
+                };
+
+                _anuncioService.Create(anuncio);
+
+                CriarNotificacao(anuncio.Categorias, usuarioLogado.Id);
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (ValidacaoException e)
+            {
+                TempData["Cadastrar_Anuncio_MensagemErro"] = e.Message;
+                return RedirectToAction("Index");
+            }
             
-            _anuncioService.Create(anuncio);
-
-            CriarNotificacao(anuncio.Categorias, usuarioLogado.Id);
-
-            return RedirectToAction("Index", "Home");
         }
 
         private string UploadFoto(IFormFile arquivoFoto)

@@ -62,7 +62,17 @@
                             </div>
                         </div>
                     </td>
-                    <td>A FAZER</td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Categorias</button>
+                            <div class="dropdown-menu">
+                                @foreach (var categorias in anuncio.Categorias)
+                                {
+                                    <a class="dropdown-item">@categorias</a>
+                                }
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>

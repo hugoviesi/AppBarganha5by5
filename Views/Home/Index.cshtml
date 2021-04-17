@@ -22,6 +22,20 @@
                 <a class="nav-link" @Html.ActionLink("Perfil", "Perfil", "Usuario")</a>
             </li>
             <li class="nav-item">
+                <div class="container">
+                    <a class="nav-link" data-toggle="modal" data-target="#Perfil">Foto de Perfil</a>
+                    <div class="modal" id="Perfil">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <img src="~/img/@Model.UsuarioLogado.Foto" width="250" height="250" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" @Html.ActionLink("Desativar Conta", "Desativar", "Usuario")</a>
             </li>
             <li class="nav-item">
@@ -33,7 +47,7 @@
     <h1 style="text-align:center">&#128513 Seja bem-vindo, @Model.UsuarioLogado.Login &#128513</h1>
     <h2 style="text-align:center">Pontuação: @Model.UsuarioLogado.Pontuacao &#11088</h2>
     <h3 style="text-align:center">Novos anúncios: <span style="font-size:20px" id="noti"></span></h3>
-    
+
     <div class="container">
         <h2>Seus Anuncios</h2>
         <p>Lista de anúncios feitos pelo usuário atualmente logado:</p>
@@ -68,7 +82,17 @@
                             <td>@anuncio.DataPublicacao.ToString("g")</td>
                             <td>@anuncio.DataFinal.ToString("g")</td>
                             <td>@anuncio.Valor</td>
-                            <td>A FAZER</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Categorias</button>
+                                    <div class="dropdown-menu">
+                                        @foreach (var categorias in anuncio.Categorias)
+                                        {
+                                            <a class="dropdown-item">@categorias</a>
+                                        }
+                                    </div>
+                                </div>
+                            </td>
                             <td>
                                 <div class="container">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@nameModal@count">Imagem</button>
@@ -81,7 +105,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>0
+                                </div>
                             </td>
                             <td>
                                 <div class="d-flex py-2">

@@ -1,4 +1,5 @@
-﻿using AppBarganhaWEB.Models;
+﻿using AppBarganhaWEB.Exceptions;
+using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Services;
 using AppBarganhaWEB.Utils;
 using AppBarganhaWEB.ViewsObject;
@@ -37,30 +38,37 @@ namespace AppBarganhaWEB.Controllers
             var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
 
             var anuncio = ofertaVO.Anuncio;
-
-            var oferta = new Oferta()
+            try
             {
-                IdUsuarioOfertante = usuarioLogado.Id,
-                IdAnuncio = anuncio.Id,
-                DataOferta = DateTime.Now,
-                DataAtualizacao = DateTime.Now,
-                Valor = ofertaVO.Valor,
-                Descricao = ofertaVO.Descricao,
-                Status = OfertaStatus.ABERTO
-            };
+                var oferta = new Oferta()
+                {
+                    IdUsuarioOfertante = usuarioLogado.Id,
+                    IdAnuncio = anuncio.Id,
+                    DataOferta = DateTime.Now,
+                    DataAtualizacao = DateTime.Now,
+                    Valor = ofertaVO.Valor,
+                    Descricao = ofertaVO.Descricao,
+                    Status = OfertaStatus.ABERTO
+                };
 
-            if (_ofertaService.ConferirValorOferta(anuncio, ofertaVO.Valor))
-            {
-                _ofertaService.Create(oferta);
+                if (_ofertaService.ConferirValorOferta(anuncio, ofertaVO.Valor))
+                {
+                    _ofertaService.Create(oferta);
+                }
+                else
+                {
+                    throw new ValidacaoException("A oferta precisa ser maior que o valor original e menor que 20% do valor original do anúncio.");
+                }
+
+                return (RedirectToAction("Index", "Leilao"));
             }
-            else
+            catch (ValidacaoException e)
             {
-                throw new Exception("A oferta precisa ser maior que o valor original e menor que 20% do valor original do anúncio.");
+                TempData["Ofertar_Oferta_MensagemErro"] = e.Message;
+                return RedirectToAction("Index", new { idAnuncio = anuncio.Id});
             }
 
-            return (RedirectToAction("Index", "Leilao"));
         }
-
         public IActionResult OfertasPorAnuncio()
         {
             var anuncioId = HttpContext.Request.Query["idAnuncio"];

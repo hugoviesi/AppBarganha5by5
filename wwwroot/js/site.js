@@ -18,6 +18,7 @@
         $('#tipoPessoa input').on('click', function (event) {
             var tipoUsuarioSelecionado = $("#tipoPessoa input[name='TipoUsuario']:checked").val()
 
+
             exibeCamposFormularioUsuarioPorTipo(tipoUsuarioSelecionado)
             exibePerfilPorUsuario(tipoUsuarioSelecionado)
         })
@@ -40,7 +41,7 @@
             $('#nomeFantasia input').val("")
 
             $('#picDocumentos').hide()
-            $('#picDocumentos').val("")
+            $('#picDocumentos input').val("")
         } else {
 
             $('#nomeFisico').hide()
@@ -91,5 +92,4 @@
     trataTipoDeFormularioPorPessoa()
     mostraFormularioUsuarioPadrao()
     validaDocumento()
-
 });

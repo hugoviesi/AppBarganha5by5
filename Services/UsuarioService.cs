@@ -1,4 +1,5 @@
 ﻿using AppBarganha.Services;
+using AppBarganhaWEB.Exceptions;
 using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Utils;
 using AppBarganhaWEB.ViewsObject;
@@ -98,7 +99,7 @@ namespace AppBarganhaWEB.Services
         {
             if (!Documento.EhValido(usuarioVO.Documento))
             {
-                throw new Exception("Documento inválido");
+                throw new ValidacaoException("Documento inválido");
             }
 
             var ehAtualizar = usuarioVO.id != null && usuarioVO.id != "";
@@ -114,7 +115,7 @@ namespace AppBarganhaWEB.Services
             }
             else
             {
-                throw new Exception("Tipo de documento desconhecido.");
+                throw new ValidacaoException("Tipo de documento desconhecido.");
             }
         }
 
@@ -143,12 +144,12 @@ namespace AppBarganhaWEB.Services
             {
                 if (ExisteDocumento(usuarioVO.Documento))
                 {
-                    throw new Exception("Documento já cadastrado");
+                    throw new ValidacaoException("Documento já cadastrado");
                 }
 
                 if (ExisteLogin(usuarioVO.Login))
                 {
-                    throw new Exception("Login já cadastrado");
+                    throw new ValidacaoException("Login já cadastrado");
                 }
 
                 var pessoaJuridica = new PessoaJuridica
@@ -193,12 +194,12 @@ namespace AppBarganhaWEB.Services
             {
                 if (ExisteDocumento(usuarioVO.Documento))
                 {
-                    throw new Exception("Usuário já cadastrado");
+                    throw new ValidacaoException("Usuário já cadastrado");
                 }
 
                 if (ExisteLogin(usuarioVO.Login))
                 {
-                    throw new Exception("Login já cadastrado");
+                    throw new ValidacaoException("Login já cadastrado");
                 }
 
                 var pessoaFisica = new PessoaFisica

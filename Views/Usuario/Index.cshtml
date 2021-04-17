@@ -11,8 +11,44 @@
             <a class="nav-link" @Html.ActionLink("Voltar", "Index", "Home")</a>
         </li>
     </ul>
+
+    @if (Model.id != null)
+    {
+        <ul class="navbar-nav">
+            <div class="container">
+                <a class="nav-link" data-toggle="modal" data-target="#PicDocumento">Documento</a>
+                <div class="modal" id="PicDocumento">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                @if (Model.FotoDocumento == null)
+                                {
+                                    <h3>Ainda não há nenhum documento a ser mostrado por aqui.</h3>
+                                }
+                                else
+                                {
+                                    @Html.ActionLink(Model.FotoDocumento, "MostrarPDF", "File", new { arquivo = Model.FotoDocumento }, new { target = "_blank" })
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    }
+
 </nav>
 <br />
+
+@{
+    var mensagemDeErro = TempData["CadastrarOuAtualizar_Usuario_MensagemErro"];
+}
+
+@if (mensagemDeErro != null)
+{
+    <h2 style="color: red">@mensagemDeErro</h2>
+}
+
 
 <div class="form-horizontal">
     <main class="d-flex justify-content-center">
@@ -82,7 +118,7 @@
 
                 <div class="form-group">
                     <label asp-for="ArquivoFoto" class="control-label"></label>
-                    <input asp-for="ArquivoFoto" accept="images/*" />
+                    <input asp-for="ArquivoFoto" accept="images/.png/.jpg" />
                     <span asp-validation-for="ArquivoFoto" class="text-danger"></span>
                 </div>
 
@@ -122,12 +158,11 @@
                 </div>
 
                 <div class="form-group" id="picDocumentos">
-                    @Html.LabelFor(model => model.FotoDocumento, "Documentos", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.FotoDocumento, new { type = "file" })
-                    </div>
+                    <label class="control-label"></label>
+                    <input asp-for="ArquivoDocumentos" accept="documentos/.pdf" />
+                    <span asp-validation-for="ArquivoDocumentos" class="text-danger"></span>
                 </div>
-                
+
                 <div class="d-flex py-2">
                     <div class="col-md-10">
                         <input type="submit" id="cadastrarUsuario" value="@( Model.id != null ? "Atualizar" : "Cadastrar" )" class="btn btn-success form-control px-5" enctype="multipart/form-data" />

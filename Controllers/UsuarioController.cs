@@ -1,8 +1,10 @@
-﻿using AppBarganhaWEB.Models;
+﻿using AppBarganhaWEB.Exceptions;
+using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Services;
 using AppBarganhaWEB.Utils;
 using AppBarganhaWEB.ViewsObject;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +13,7 @@ namespace AppBarganhaWEB.Controllers
     public class UsuarioController : Controller
     {
         private readonly UsuarioService _usuarioService;
-        
+
 
         public UsuarioController(UsuarioService usuarioService)
         {
@@ -66,6 +68,7 @@ namespace AppBarganhaWEB.Controllers
                     TipoUsuario = "Pessoa Jurídica",
                     NomeFantasia = pessoaJurudica.NomeFantasia,
                     RazaoSocial = pessoaJurudica.RazaoSocial,
+                    FotoDocumento = pessoaJurudica.FotoDocumento,
                     Documento = pessoaJurudica.Cnpj,
                     Login = pessoaJurudica.Login,
                     Endereco = pessoaJurudica.Endereco,
@@ -80,15 +83,26 @@ namespace AppBarganhaWEB.Controllers
 
         public IActionResult CadastrarOuAtualizar(UsuarioVO usuarioVO)
         {
-            var usuario = _usuarioService.CriarOuAtualizar(usuarioVO);
+            try
+            {
 
-            if(usuarioVO.id != null)
+                var usuario = _usuarioService.CriarOuAtualizar(usuarioVO);
+                if (usuarioVO.id != null)
+                {
+                    UsuarioLogadoSessao.Armazenar(HttpContext, usuario);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Login");
+                }
+
+            }
+            catch (ValidacaoException e)
             {
-                UsuarioLogadoSessao.Armazenar(HttpContext, usuario);
-                return RedirectToAction("Index", "Home");
-            } else
-            {
-                return RedirectToAction("Index", "Login");
+                TempData["CadastrarOuAtualizar_Usuario_MensagemErro"] = e.Message;
+                return RedirectToAction("Index");
+
             }
         }
 

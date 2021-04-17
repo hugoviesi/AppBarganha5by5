@@ -46,7 +46,17 @@
                     <td>@anuncio.DataPublicacao.ToString("g")</td>
                     <td>@anuncio.DataFinal.ToString("g")</td>
                     <td>@anuncio.Valor</td>
-                    <td>A FAZER</td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Categorias</button>
+                            <div class="dropdown-menu">
+                                @foreach (var categorias in anuncio.Categorias)
+                                {
+                                    <a class="dropdown-item">@categorias</a>
+                                }
+                            </div>
+                        </div>
+                    </td>
                     <td>
                         <div class="container">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAnuncio">Imagem</button>
@@ -66,6 +76,15 @@
             </tbody>
         </table>
     </div>
+}
+
+@{
+    var mensagemDeErro = TempData["Ofertar_Oferta_MensagemErro"];
+}
+
+@if (mensagemDeErro != null)
+{
+    <h2 style="color: red">@mensagemDeErro</h2>
 }
 
 @using (Html.BeginForm("Ofertar", "Oferta", FormMethod.Post))
