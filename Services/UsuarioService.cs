@@ -268,10 +268,10 @@ namespace AppBarganhaWEB.Services
             return usuario;
         }
 
-        public Usuario AtualizarQtdAnuncio(string idUsuario, int qtdAnuncio)
+        public Usuario AtualizarQtdAnuncio(string idUsuario)
         {
             var usuario = Get(idUsuario);
-            usuario.QtdAnuncios += qtdAnuncio;
+            usuario.QtdAnuncios += 3;
 
             if (usuario is PessoaFisica)
             {

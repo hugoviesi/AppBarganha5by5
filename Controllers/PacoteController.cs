@@ -22,7 +22,7 @@ namespace AppBarganhaWEB.Controllers
         {
             var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
 
-            var usuario = _usuarioService.AtualizarQtdAnuncio(usuarioLogado.Id, 3);
+            var usuario = _usuarioService.AtualizarQtdAnuncio(usuarioLogado.Id);
 
             return RedirectToAction("Index", "Anuncio");
         }
