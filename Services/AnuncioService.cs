@@ -1,7 +1,6 @@
 ﻿using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Utils;
 using MongoDB.Driver;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -53,6 +52,16 @@ namespace AppBarganhaWEB.Services
         public long QtdAnunciosUsuario(string idUsuario)
         {
             return _anuncios.CountDocuments(anuncio => anuncio.IdUsuario == idUsuario);
+        }
+        public bool ConferirValorAnuncio(Anuncio anuncioIn)
+        {
+            var anuncio = Get(anuncioIn.Id);
+
+            if ((anuncio.Valor >= (decimal)0.10))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

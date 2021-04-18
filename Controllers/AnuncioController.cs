@@ -47,6 +47,11 @@ namespace AppBarganhaWEB.Controllers
             {
                 var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
 
+                if (anuncioVO.Valor < (decimal)0.10)
+                {
+                    throw new ValidacaoException("Valor menor que o mínimo de 10 centavos.");
+                }
+
                 var anuncio = new Anuncio
                 {
                     Nome = anuncioVO.Nome,
@@ -65,13 +70,14 @@ namespace AppBarganhaWEB.Controllers
                 CriarNotificacao(anuncio.Categorias, usuarioLogado.Id);
 
                 return RedirectToAction("Index", "Home");
+
             }
             catch (ValidacaoException e)
             {
                 TempData["Cadastrar_Anuncio_MensagemErro"] = e.Message;
                 return RedirectToAction("Index");
             }
-            
+
         }
 
         private string UploadFoto(IFormFile arquivoFoto)
