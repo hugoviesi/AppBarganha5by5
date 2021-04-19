@@ -7,5 +7,6 @@ namespace AppBarganhaWEB.ViewsObject
     {
         public Usuario UsuarioLogado { get; set; }
         public List<Anuncio> Anuncios { get; set; }
+        public List<Anuncio> AnunciosInativos { get; set; }
     }
 }

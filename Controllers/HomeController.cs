@@ -24,7 +24,8 @@ namespace AppBarganhaWEB.Controllers
             var homeVO = new HomeVO
             {
                 UsuarioLogado = _usuarioService.Get(usuarioLogado.Id),
-                Anuncios = _anuncioService.GetForUser(usuarioLogado.Id)
+                Anuncios = _anuncioService.GetForUser(usuarioLogado.Id),
+                AnunciosInativos = _anuncioService.GetForUserInativo(usuarioLogado.Id)
             };
 
             return View(homeVO);

@@ -26,5 +26,7 @@ namespace AppBarganhaWEB.Models
 
         [NotMapped]
         public IFormFile ArquivoFoto { get; set; }
+
+        public bool Ativo { get; set; }
     }
 }

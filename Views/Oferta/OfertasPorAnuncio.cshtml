@@ -44,7 +44,7 @@
                     <td>1</td>
                     <td>@anuncio.Nome</td>
                     <td>@anuncio.Descricao</td>
-                    <td>@anuncio.Valor</td>
+                    <td>R$ @anuncio.Valor</td>
                     <td>@anuncio.DataPublicacao.ToString("dd/MM/yyyy")</td>
                     <td>@anuncio.DataFinal.ToString("dd/MM/yyyy")</td>
                     <td>
@@ -103,7 +103,7 @@
                     <tr>
                         <th scope="row">@count</th>
                         <td>@oferta.Descricao</td>
-                        <td>@oferta.Valor</td>
+                        <td>R$ @oferta.Valor</td>
                         <td>@oferta.DataOferta.ToString("dd/MM/yyyy")</td>
                         <td>@oferta.DataAtualizacao.ToString("dd/MM/yyyy")</td>
                         @{ if (oferta.Status == OfertaStatus.ABERTO)

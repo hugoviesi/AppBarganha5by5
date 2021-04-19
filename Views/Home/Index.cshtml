@@ -64,6 +64,7 @@
                     <th>Foto</th>
                     <th>Ofertas</th>
                     <th>Situação</th>
+                    <th>Desativar</th>
                 </tr>
             </thead>
             @{
@@ -81,7 +82,7 @@
                             <td>@anuncio.Descricao</td>
                             <td>@anuncio.DataPublicacao.ToString("dd/MM/yyyy")</td>
                             <td>@anuncio.DataFinal.ToString("dd/MM/yyyy")</td>
-                            <td>@anuncio.Valor</td>
+                            <td>R$ @anuncio.Valor</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Categorias</button>
@@ -115,6 +116,82 @@
                                 </div>
                             </td>
                             <td>@anuncio.Status</td>
+                            <td>
+                                <div class="d-flex py-2">
+                                    <div class="col-md-10">
+                                        @Html.ActionLink("Desativar", "Desativar", "Anuncio", new { idAnuncio = anuncio.Id }, null)
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    count++;
+                }
+            }
+        </table>
+    </div>
+    <br />
+    <div class="container">
+        <h2>Seus Anuncios Inativos</h2>
+        <p>Lista de anúncios inativos feitos pelo usuário atualmente logado:</p>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Índice</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Data de Publicação</th>
+                    <th>Data de Encerramento</th>
+                    <th>Valor</th>
+                    <th>Categorias</th>
+                    <th>Foto</th>
+                    <th>Situação</th>
+                </tr>
+            </thead>
+            @{
+                int countInativo = 1;
+
+                string nameModaInativo = "Model";
+
+                @foreach (var anuncio in Model.AnunciosInativos)
+                {
+
+                    <tbody>
+                        <tr>
+                            <th scope="row">@count</th>
+                            <td>@anuncio.Nome</td>
+                            <td>@anuncio.Descricao</td>
+                            <td>@anuncio.DataPublicacao.ToString("dd/MM/yyyy")</td>
+                            <td>@anuncio.DataFinal.ToString("dd/MM/yyyy")</td>
+                            <td>R$ @anuncio.Valor</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Categorias</button>
+                                    <div class="dropdown-menu">
+                                        @foreach (var categorias in anuncio.Categorias)
+                                        {
+                                            <a class="dropdown-item">@categorias</a>
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="container">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@nameModaInativo@countInativo">Imagem</button>
+                                    <div class="modal" id="@nameModaInativo@countInativo">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <img src="~/img/@anuncio.Foto" width="250" height="250" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                DESATIVADO
+                            </td>
                         </tr>
                     </tbody>
                     count++;

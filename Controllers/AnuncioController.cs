@@ -78,6 +78,7 @@ namespace AppBarganhaWEB.Controllers
                     Descricao = anuncioVO.Descricao,
                     Categorias = anuncioVO.GetCategorias(),
                     Valor = anuncioVO.Valor,
+                    Ativo = true,
                     Foto = UploadFoto(anuncioVO.ArquivoFoto),
                     DataPublicacao = DateTime.Now,
                     DataFinal = DateTime.Now.AddDays(30),
@@ -112,6 +113,19 @@ namespace AppBarganhaWEB.Controllers
             {
                 _usuarioService.AtualizarNotificacoes(usuario);
             }
+        }
+
+        public IActionResult Desativar()
+        {
+            var anuncioId = HttpContext.Request.Query["idAnuncio"];
+
+            var anuncio = _anuncioService.Get(anuncioId);
+
+            anuncio.Ativo = false;
+
+            _anuncioService.Update(anuncio.Id, anuncio);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

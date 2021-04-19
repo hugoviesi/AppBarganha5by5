@@ -24,7 +24,9 @@ namespace AppBarganhaWEB.Services
             _anuncios.Find<Anuncio>(anuncio => anuncio.Id == id).FirstOrDefault();
 
         public List<Anuncio> GetForUser(string usuarioId) =>
-            _anuncios.Find<Anuncio>(anuncio => anuncio.IdUsuario == usuarioId).ToList();
+            _anuncios.Find<Anuncio>(anuncio => anuncio.IdUsuario == usuarioId && anuncio.Ativo == true).ToList();
+        public List<Anuncio> GetForUserInativo(string usuarioId) =>
+            _anuncios.Find<Anuncio>(anuncio => anuncio.IdUsuario == usuarioId && anuncio.Ativo == false).ToList();
 
         public Anuncio Create(Anuncio anuncio)
         {
@@ -46,6 +48,7 @@ namespace AppBarganhaWEB.Services
             return _anuncios.Find<Anuncio>(
                 anuncio => anuncio.Categorias.Any(c => categorias.Contains(c)) 
                 && anuncio.IdUsuario != idUsuarioLogado
+                && anuncio.Ativo == true
                 && anuncio.Status == StatusAnuncio.ABERTO).ToList();
         }
 

@@ -7,6 +7,7 @@ namespace AppBarganhaWEB.ViewsObject
 {
     public class AnuncioVO
     {
+        public bool Ativo { get; set; }
         public IFormFile picAnuncio { get; set; }
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
