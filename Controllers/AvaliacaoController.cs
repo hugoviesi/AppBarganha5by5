@@ -1,8 +1,8 @@
-﻿using AppBarganhaWEB.Models;
+﻿using AppBarganhaWEB.Exceptions;
+using AppBarganhaWEB.Models;
 using AppBarganhaWEB.Services;
 using AppBarganhaWEB.ViewsObject;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace AppBarganhaWEB.Controllers
 {
@@ -38,7 +38,7 @@ namespace AppBarganhaWEB.Controllers
             }
             else
             {
-                throw new Exception("modo desconhecido");
+                throw new ValidacaoException("modo desconhecido");
             };
 
             var avaliacaoVO = new AvaliacaoVO

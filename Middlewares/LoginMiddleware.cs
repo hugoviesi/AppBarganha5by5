@@ -12,13 +12,13 @@ namespace AppBarganhaWEB.Middlewares
     public class LoginMiddleware
     {
         private readonly RequestDelegate _next; //responsável por trabalhar com a chamada do próximo middleware
-
-        private static List<string> PAGINAS_DESLOGADAS = new List<string>() { "/Usuario", "/Usuario/CadastrarOuAtualizar", "/Login", "/Login/Logar", "/ValidadorDocumento", "/Login/SobreNos", "/Login/Contato" };
-        //páginas que o usuário é permitido navegar sem estar logado na sessão
         public LoginMiddleware(RequestDelegate next)
         {
             _next = next;
         }
+
+        private static List<string> PAGINAS_DESLOGADAS = new List<string>() { "/Usuario", "/Usuario/CadastrarOuAtualizar", "/Login", "/Login/Logar", "/ValidadorDocumento", "/Login/SobreNos", "/Login/Contato" };
+        //páginas que o usuário é permitido navegar sem estar logado na sessão       
 
         public async Task InvokeAsync(HttpContext context)
         {
