@@ -121,7 +121,7 @@ namespace AppBarganhaWEB.Services
 
         private Usuario CriarOuAtualizarPessoaJuridica(UsuarioVO usuarioVO, bool ehAtualizar)
         {
-
+           
             if (ehAtualizar)
             {
                 var usuarioAtual = _pessoaJuridicaService.Get(usuarioVO.id);
@@ -134,6 +134,46 @@ namespace AppBarganhaWEB.Services
                 if (usuarioVO.Senha != null)
                 {
                     usuarioAtual.Senha = Senha.GeraHash(usuarioVO.Senha);
+                }
+
+                if (usuarioVO.Login == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter login.");
+                }
+
+                if (usuarioVO.RazaoSocial == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter razão social.");
+                }
+
+                if (usuarioVO.InteressesSelecionados == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter pelo menos um interesse de categorias.");
+                }
+
+                if (usuarioVO.Endereco.Cep == null)
+                {
+                    throw new ValidacaoException("CEP inválido.");
+                }
+
+                if (usuarioVO.Endereco.Logradouro == null)
+                {
+                    throw new ValidacaoException("Logradouro inválido.");
+                }
+
+                if (usuarioVO.Endereco.Bairro == null)
+                {
+                    throw new ValidacaoException("Bairro inválido.");
+                }
+
+                if (usuarioVO.Endereco.Localidade == null)
+                {
+                    throw new ValidacaoException("Localidade inválida.");
+                }
+
+                if (usuarioVO.Endereco.Uf == null)
+                {
+                    throw new ValidacaoException("Unidade Federativa inválida.");
                 }
 
                 _pessoaJuridicaService.Update(usuarioAtual.Id, usuarioAtual);
@@ -150,6 +190,61 @@ namespace AppBarganhaWEB.Services
                 if (ExisteLogin(usuarioVO.Login))
                 {
                     throw new ValidacaoException("Login já cadastrado");
+                }
+
+                if (usuarioVO.Login == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter login.");
+                }
+
+                if (usuarioVO.Senha == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter senha.");
+                }
+
+                if (usuarioVO.RazaoSocial == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter razão social.");
+                }
+
+                if (usuarioVO.InteressesSelecionados == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter pelo menos um interesse de categorias.");
+                }
+
+                if (usuarioVO.ArquivoFoto == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter foto.");
+                }
+
+                if (usuarioVO.ArquivoDocumentos == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter documento.");
+                }
+
+                if (usuarioVO.Endereco.Cep == null)
+                {
+                    throw new ValidacaoException("CEP inválido.");
+                }
+
+                if (usuarioVO.Endereco.Logradouro == null)
+                {
+                    throw new ValidacaoException("Logradouro inválido.");
+                }
+
+                if (usuarioVO.Endereco.Bairro == null)
+                {
+                    throw new ValidacaoException("Bairro inválido.");
+                }
+
+                if (usuarioVO.Endereco.Localidade == null)
+                {
+                    throw new ValidacaoException("Localidade inválida.");
+                }
+
+                if (usuarioVO.Endereco.Uf == null)
+                {
+                    throw new ValidacaoException("Unidade Federativa inválida.");
                 }
 
                 var pessoaJuridica = new PessoaJuridica
@@ -187,11 +282,101 @@ namespace AppBarganhaWEB.Services
                     usuarioAtual.Senha = Senha.GeraHash(usuarioVO.Senha);
                 }
 
+                if (usuarioVO.Login == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter login.");
+                }
+
+                if (usuarioVO.Nome == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter nome.");
+                }
+
+                if (usuarioVO.InteressesSelecionados == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter pelo menos um interesse de categorias.");
+                }
+
+                if (usuarioVO.Endereco.Cep == null)
+                {
+                    throw new ValidacaoException("CEP inválido.");
+                }
+
+                if (usuarioVO.Endereco.Logradouro == null)
+                {
+                    throw new ValidacaoException("Logradouro inválido.");
+                }
+
+                if (usuarioVO.Endereco.Bairro == null)
+                {
+                    throw new ValidacaoException("Bairro inválido.");
+                }
+
+                if (usuarioVO.Endereco.Localidade == null)
+                {
+                    throw new ValidacaoException("Localidade inválida.");
+                }
+
+                if (usuarioVO.Endereco.Uf == null)
+                {
+                    throw new ValidacaoException("Unidade Federativa inválida.");
+                }
+
                 _pessoaFisicaService.Update(usuarioAtual.Id, usuarioAtual);
                 return usuarioAtual;
             }
             else
             {
+                if (usuarioVO.Login == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter login.");
+                }
+
+                if (usuarioVO.Senha == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter senha.");
+                }
+
+                if (usuarioVO.Nome == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter nome.");
+                }
+
+                if (usuarioVO.InteressesSelecionados == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter pelo menos um interesse de categorias.");
+                }
+
+                if (usuarioVO.ArquivoFoto == null)
+                {
+                    throw new ValidacaoException("Usuário precisa ter foto.");
+                }
+
+                if (usuarioVO.Endereco.Cep == null)
+                {
+                    throw new ValidacaoException("CEP inválido.");
+                }
+
+                if (usuarioVO.Endereco.Logradouro == null)
+                {
+                    throw new ValidacaoException("Logradouro inválido.");
+                }
+
+                if (usuarioVO.Endereco.Bairro == null)
+                {
+                    throw new ValidacaoException("Bairro inválido.");
+                }
+
+                if (usuarioVO.Endereco.Localidade == null)
+                {
+                    throw new ValidacaoException("Localidade inválida.");
+                }
+
+                if (usuarioVO.Endereco.Uf == null)
+                {
+                    throw new ValidacaoException("Unidade Federativa inválida.");
+                }
+
                 if (ExisteDocumento(usuarioVO.Documento))
                 {
                     throw new ValidacaoException("Usuário já cadastrado");

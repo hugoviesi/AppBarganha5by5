@@ -38,6 +38,7 @@ namespace AppBarganhaWEB.Controllers
             var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
 
             var anuncio = ofertaVO.Anuncio;
+
             try
             {
                 var oferta = new Oferta()
@@ -50,6 +51,11 @@ namespace AppBarganhaWEB.Controllers
                     Descricao = ofertaVO.Descricao,
                     Status = OfertaStatus.ABERTO
                 };
+
+                if(ofertaVO.Descricao == null)
+                {
+                    throw new ValidacaoException("A oferta precisa ter uma descrição.");
+                }
 
                 if (_ofertaService.ConferirValorOferta(anuncio, ofertaVO.Valor))
                 {

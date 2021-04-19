@@ -85,7 +85,6 @@ namespace AppBarganhaWEB.Controllers
         {
             try
             {
-
                 var usuario = _usuarioService.CriarOuAtualizar(usuarioVO);
                 if (usuarioVO.id != null)
                 {

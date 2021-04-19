@@ -36,5 +36,4 @@ namespace AppBarganhaWEB.Hubs
             return connectionId;
         }
     }
-    
 }

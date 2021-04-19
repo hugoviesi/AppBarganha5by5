@@ -30,7 +30,6 @@ namespace AppBarganhaWEB.Middlewares
             {
                 await _next.Invoke(context); //chamar o próximo middleware
             }
-
         }
     }
 }

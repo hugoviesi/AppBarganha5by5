@@ -21,6 +21,12 @@
     var mensagemDeErro = TempData["Cadastrar_Anuncio_MensagemErro"];
 }
 
+@if (mensagemDeErro != null)
+{
+    <h2 style="color: red">@mensagemDeErro</h2>
+}
+
+
 <div class="form-horizontal">
     <h2>Cadastro de Anúncio</h2>
     <p>Preencha o formulário para realizar o seu anuncio:</p>

@@ -47,6 +47,26 @@ namespace AppBarganhaWEB.Controllers
             {
                 var usuarioLogado = UsuarioLogadoSessao.Recuperar(HttpContext);
 
+                if (anuncioVO.Nome == null)
+                {
+                    throw new ValidacaoException("Anuncio sem nome.");
+                }
+
+                if (anuncioVO.Descricao == null)
+                {
+                    throw new ValidacaoException("Anuncio sem descrição.");
+                }
+
+                if (anuncioVO.ArquivoFoto == null)
+                {
+                    throw new ValidacaoException("Anuncio sem foto.");
+                }
+
+                if (anuncioVO.InteressesSelecionados == null)
+                {
+                    throw new ValidacaoException("Anuncio precisa ter pelo menos uma categoria.");
+                }
+
                 if (anuncioVO.Valor < (decimal)0.10)
                 {
                     throw new ValidacaoException("Valor menor que o mínimo de 10 centavos.");

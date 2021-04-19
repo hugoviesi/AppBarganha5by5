@@ -1,4 +1,5 @@
 ﻿using AppBarganha.Services;
+using AppBarganhaWEB.Exceptions;
 
 namespace AppBarganhaWEB.Utils
 {

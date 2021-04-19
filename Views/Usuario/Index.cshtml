@@ -118,7 +118,7 @@
 
                 <div class="form-group">
                     <label asp-for="ArquivoFoto" class="control-label"></label>
-                    <input asp-for="ArquivoFoto" accept="images/.png/.jpg" />
+                    <input asp-for="ArquivoFoto" accept=".jpg, .png" />
                     <span asp-validation-for="ArquivoFoto" class="text-danger"></span>
                 </div>
 
@@ -159,7 +159,7 @@
 
                 <div class="form-group" id="picDocumentos">
                     <label class="control-label"></label>
-                    <input asp-for="ArquivoDocumentos" accept="documentos/.pdf" />
+                    <input asp-for="ArquivoDocumentos" accept=".pdf, .txt" />
                     <span asp-validation-for="ArquivoDocumentos" class="text-danger"></span>
                 </div>
 
