@@ -20,11 +20,11 @@
             $.getJSON("https://api-publica.speedio.com.br/buscarcnpj?cnpj=" + $('#documento input').val().replace('-', '').replace('.', '').replace('/', '').replace('\\', ''), function (cnpj) {
                 $('#razaoSocial input').val(cnpj['RAZAO SOCIAL'])
                 $('#nomeFantasia input').val(cnpj['NOME FANTASIA'])
-                $('#cepLabel input').val(cnpj.CEP)
-                $('#logradouro input').val(cnpj.LOGRADOURO)
-                $('#bairro input').val(cnpj.BAIRRO)
-                $('#localidade input').val(cnpj.MUNICIPIO)
-                $('#uf input').val(cnpj.UF)
+                $('#cepLabel input').val(cnpj['CEP'])
+                $('#logradouro input').val(cnpj['LOGRADOURO'])
+                $('#bairro input').val(cnpj['BAIRRO'])
+                $('#localidade input').val(cnpj['MUNICIPIO'])
+                $('#uf input').val(cnpj['UF'])
             });
         });
     }
