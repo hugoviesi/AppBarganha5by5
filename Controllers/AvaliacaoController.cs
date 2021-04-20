@@ -54,37 +54,46 @@ namespace AppBarganhaWEB.Controllers
 
         public IActionResult Avaliar(AvaliarVO avaliarVO)
         {
-            var oferta = _ofertaService.Get(avaliarVO.Oferta.Id);
-
-            if (avaliarVO.Modo == "ANUNCIANTE")
+            try
             {
-                oferta.AnuncianteAvaliado = true;
-                _ofertaService.Update(oferta.Id, oferta);
-            }
-            else if (avaliarVO.Modo == "OFERTANTE") 
-            {                        
-                oferta.OfertanteAvaliado = true;
-                _ofertaService.Update(oferta.Id, oferta);
-            }
+                var oferta = _ofertaService.Get(avaliarVO.Oferta.Id);
 
-            int pontos = 0;
+                if (avaliarVO.Modo == "ANUNCIANTE")
+                {
+                    oferta.AnuncianteAvaliado = true;
+                    _ofertaService.Update(oferta.Id, oferta);
+                }
+                else if (avaliarVO.Modo == "OFERTANTE")
+                {
+                    oferta.OfertanteAvaliado = true;
+                    _ofertaService.Update(oferta.Id, oferta);
+                }
 
-            if (avaliarVO.Pontos == "Positivo")
+                int pontos = 0;
+
+                if (avaliarVO.Pontos == "Positivo")
+                {
+                    pontos = 2;
+                }
+                else if (avaliarVO.Pontos == "Neutro")
+                {
+                    pontos = 1;
+                }
+                else
+                {
+                    pontos = -2;
+                }
+
+                _usuarioService.AtualizarPontuacao(avaliarVO.Usuario.Id, pontos);
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (ValidacaoException e)
             {
-                pontos = 2;
+                TempData["Avaliar_Avaliacao_MensagemErro"] = e.Message;
+                return RedirectToAction("Index");
             }
-            else if (avaliarVO.Pontos == "Neutro")
-            {
-                pontos = 1;
-            }
-            else
-            {
-                pontos = -2;
-            }
-
-            _usuarioService.AtualizarPontuacao(avaliarVO.Usuario.Id, pontos);
-
-            return RedirectToAction("Index", "Home");
+            
         }
     }
 

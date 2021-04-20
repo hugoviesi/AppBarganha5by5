@@ -18,6 +18,15 @@
     </ul>
 </nav>
 
+@{
+    var mensagemDeErro = TempData["Avaliar_Avaliacao_MensagemErro"];
+}
+
+@if (mensagemDeErro != null)
+{
+    <h2 style="color: red">@mensagemDeErro</h2>
+}
+
 <br />
 
 @{
